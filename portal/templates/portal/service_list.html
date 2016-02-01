@@ -1,0 +1,93 @@
+{% extends 'site/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<!-- page-intro start-->
+<!-- ================ -->
+<div class="page-intro">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home pr-10"></i><a href="{% url 'home' %}">Página Inicial</a></li>
+                    <li class="active">Serviços</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- page-intro end -->
+
+<!-- main-container start -->
+<!-- ================ -->
+<section class="main-container">
+
+    <div class="container">
+        <div class="row">
+			<!-- main-container start -->
+			<!-- ================ -->
+			<section class="main-container">
+
+				<div class="container">
+					<div class="row">
+
+						<!-- main start -->
+						<!-- ================ -->
+						<div class="main col-md-12">
+
+							<!-- page-title start -->
+							<!-- ================ -->
+							<h1 class="page-title">Serviços</h1>
+							<div class="separator-2"></div>
+							<p class="lead">Prezando sempre pela qualidade e excelência, temos uma equipe preparada para atender as suas necessidades.</p>
+							<!-- page-title end -->
+
+							<!-- portfolio items start -->
+                            <div class="isotope-container row">
+                                {% for object in object_list %}
+								<div class="col-md-4 col-sm-6 isotope-item xadrez">
+									<div class="image-box">
+										<div class="overlay-container">
+                                            <img src="{{ object.get_random_image.file.url }}" alt="{{ object.title }}">
+											<div class="overlay">
+												<div class="overlay-links">
+                                                    <a href="{{ object.get_absolute_url }}"><i class="fa fa-link"></i></a>
+													<a href="{{ object.get_random_image.file.url }}" class="popup-img"><i class="fa fa-search-plus"></i></a>
+												</div>
+                                                <span>{{ object.title }}</span>
+											</div>
+										</div>
+										<div class="image-box-body">
+                                            <h3 class="title"><a href="{{ object.get_absolute_url }}">{{ object.title|truncatewords:5 }}</a></h3>
+                                            <p>{{ object.description }}</p>
+											<a href="{{ object.get_absolute_url }}" class="link"><span>Saiba mais</span></a>
+										</div>
+									</div>
+                                </div>
+                                {% endfor %}
+							</div>
+							<!-- portfolio items end -->
+
+						</div>
+						<!-- main end -->
+
+					</div>
+				</div>
+			</section>
+			<!-- main-container end -->
+
+        </div>
+
+    </div>
+
+</section>
+<!-- main-container end -->
+
+{% endblock %}
+
+{% block js %}
+    <!-- Isotope javascript -->
+    <script type="text/javascript" src="{{ STATIC_URL }}site/plugins/isotope/isotope.pkgd.min.js"></script>
+{% endblock %}

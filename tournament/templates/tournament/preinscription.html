@@ -1,0 +1,67 @@
+{% extends 'site/base.html' %}
+
+{% block content %}
+
+<!-- page-intro start-->
+<!-- ================ -->
+<div class="page-intro">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<ol class="breadcrumb">
+					<li><i class="fa fa-home pr-10"></i><a href="{% url 'home' %}">Página Inicial</a></li>
+					<li><a href="#">Torneios</a></li>
+					<li><a href="{% url 'tournament:chessfestival' %}">Festival de Xadrez</a></li>
+					<li class="active}">Pré-inscrição</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- page-intro end -->
+
+<!-- main-container start -->
+<!-- ================ -->
+<section class="main-container">
+
+	<div class="container">
+		<div class="row">
+            <div class="col-md-8">
+                <h2>Olá {{ object.name }}, A pré-inscrição foi realizada com sucesso!</h2>
+                <p>Lembre-se que para confirmar a inscrição você deverá efetuar o
+                    depósito de <strong>R$ {{ total }}</strong> na conta bancária abaixo e enviar
+                o comprovante para nós através do email: <strong>torneios@estavos.com</strong></p>
+
+                <p>O número de identificação de sua inscrição é: <strong>{{ inscription_number }}</strong><br/>
+                    Utilize ele se precisar entrar em contato.
+                </p>
+
+                <p>
+                    Dados para depósito bancário: <br/>
+                    <strong>Caixa Econômica Federal</strong><br />
+                    <strong>Agência</strong>: 1803 <br />
+                    <strong>Operação</strong>: 003 <br />
+                    <strong>Conta corrente</strong>: 227-8<br />
+                    <strong>Cnpj</strong>: 18.157.637/0001-51
+                </p>
+                <p>ESTAVOS - Organizadora de Eventos Desportivos e Academia de
+                    Jogos Mentais e de Entretenimento LTDA. - ME</p>
+
+                {% with c_comp=object.competitors.count %}
+                <p>O{{ c_comp|pluralize }} atleta{{ c_comp|pluralize }}
+                    abaixo est{{ c_comp|pluralize:'á,ão' }} pré-inscrito{{ c_comp|pluralize }}:</p>
+                {% endwith %}
+                <ul>
+                    {% for competitor in object.competitors.all %}
+                    <li>{{ competitor.name }} - {{ competitor.birth|date:'d/m/Y' }}</li>
+                    {% endfor %}
+                </ul>
+                <br/>
+                <p>No caso de divergência de dados ou havendo dúvidas, fale conosco
+                    através de nossos <a href="{% url 'contato' %}">canais de atendimento</a>.</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,201 @@
+{% extends 'site/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<!-- page-intro start-->
+<!-- ================ -->
+<div class="page-intro">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home pr-10"></i><a href="{% url 'home' %}">Página Inicial</a></li>
+                    <li class="active">Trabalhe conosco</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- page-intro end -->
+
+<!-- main-container start -->
+<!-- ================ -->
+<section class="main-container">
+
+    <div class="container">
+        <div class="row">
+            <div class="main col-md-12">
+                <!-- page-title start -->
+                <!-- ================ -->
+                <h1 class="page-title">Trabalhe conosco</h1>
+                <!-- page-title end -->
+                <div class="separator-2"></div>
+                <p class="lead">A Academia ESTAVOS está recrutando Instrutores de Xadrez interessados em compartilhar sua paixão pelo Xadrez com o mundo!</p>
+                <p>Cadastre-se em nosso banco de talentos! É rápido e fácil!</p>
+                {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %}" role="alert">
+                        <strong>Tudo certo!</strong>
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                 {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <strong>Ops... Algo aconteceu:</strong>
+                        Por favor, corrija o{{ form.errors|pluralize }} erro{{ form.errors|pluralize }} abaixo.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="row">
+            <div class="main col-md-12">
+                <div class="contact-form">
+                    <form role="form" method="post" action="" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form.non_field_errors }}
+
+                        <div class="row">
+                            <div class="main col-md-6">
+                                <div class="form-group has-feedback {% if form.name.errors %}has-error{% endif %}">
+                                    <label for="{{ form.name.id_for_label }}">{{ form.name.label }}*</label>
+                                    {% if form.name.errors %}
+                                        <div class="text-danger" role="alert">{{ form.name.errors.as_text }}</div>
+                                    {% endif %}
+                                    {{ form.name }}
+                                </div>
+                                <div class="form-group has-feedback {% if form.address.errors %}has-error{% endif %}">
+                                    <label for="{{ form.address.id_for_label }}">{{ form.address.label }}*</label>
+                                    {% if form.address.errors %}
+                                        <div class="text-danger" role="alert">{{ form.address.errors.as_text }}</div>
+                                    {% endif %}
+                                    {{ form.address }}
+                                </div>
+                                <div class="form-group has-feedback {% if form.complement.errors %}has-error{% endif %}">
+                                    <label for="{{ form.complement.id_for_label }}">{{ form.complement.label }}*</label>
+                                    {% if form.complement.errors %}
+                                        <div class="text-danger" role="alert">{{ form.complement.errors.as_text }}</div>
+                                    {% endif %}
+                                    {{ form.complement }}
+                                </div>
+                                <div class="form-group has-feedback {% if form.district.errors %}has-error{% endif %}">
+                                    <label for="{{ form.district.id_for_label }}">{{ form.district.label }}*</label>
+                                    {% if form.district.errors %}
+                                        <div class="text-danger" role="alert">{{ form.district.errors.as_text }}</div>
+                                    {% endif %}
+                                    {{ form.district }}
+                                </div>
+                                <div class="form-group has-feedback {% if form.city.errors %}has-error{% endif %}">
+                                    <label for="{{ form.city.id_for_label }}">{{ form.city.label }}*</label>
+                                    {% if form.city.errors %}
+                                        <div class="text-danger" role="alert">{{ form.city.errors.as_text }}</div>
+                                    {% endif %}
+                                    {{ form.city }}
+                                </div>
+                            </div>
+                            <div class="main col-md-6">
+                                <div class="form-group has-feedback {% if form.state.errors %}has-error{% endif %}">
+                                    <label for="{{ form.state.id_for_label }}">{{ form.state.label }}*</label>
+                                    {% if form.state.errors %}
+                                        <div class="text-danger" role="alert">{{ form.state.errors.as_text }}</div>
+                                    {% endif %}
+                                    {{ form.state }}
+                                </div>
+                                <div class="form-group has-feedback {% if form.birth.errors %}has-error{% endif %}">
+                                    <label for="{{ form.birth.id_for_label }}">{{ form.birth.label }}*</label>
+                                    {% if form.birth.errors %}
+                                        <div class="text-danger" role="alert">{{ form.birth.errors.as_text }}</div>
+                                    {% endif %}
+                                    {{ form.birth }}
+                                </div>
+                                <div class="form-group has-feedback {% if form.phone.errors %}has-error{% endif %}">
+                                    <label for="{{ form.phone.id_for_label }}">{{ form.phone.label }}</label>
+                                    {% if form.phone.errros %}
+                                        <div class="text-danger" role="alert">{{ form.phone.errors.as_text }}</div>
+                                    {% endif %}
+                                    {{ form.phone }}
+                                </div>
+                                <div class="form-group has-feedback {% if form.mobile.errors %}has-error{% endif %}">
+                                    <label for="{{ form.mobile.id_for_label }}">{{ form.mobile.label }}*</label>
+                                    {% if form.mobile.errros %}
+                                        <div class="text-danger" role="alert">{{ form.mobile.errors.as_text }}</div>
+                                    {% endif %}
+                                    {{ form.mobile }}
+                                </div>
+                                <div class="form-group has-feedback {% if form.email.errors %}has-error{% endif %}">
+                                    <label for="{{ form.email.id_for_label }}">{{ form.email.label }}*</label>
+                                    {% if form.email.errors %}
+                                        <div class="text-danger" role="alert">{{ form.email.errors.as_text }}</div>
+                                    {% endif %}
+                                    {{ form.email }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="main col-md-6">
+                                <div class="form-group has-feedback {% if form.week_morning.errors %}has-error{% endif %}">
+                                    <label for="{{ form.week_morning.id_for_label }}">{{ form.week_morning.label }}</label>
+                                    {% if form.week_morning.errors %}
+                                        <div class="text-danger" role="alert">{{ form.week_morning.errors.as_text }}</div>
+                                    {% endif %}
+                                    {{ form.week_morning }}
+                                </div>
+                                <div class="form-group has-feedback {% if form.week_afternoon.errors %}has-error{% endif %}">
+                                    <label for="{{ form.week_afternoon.id_for_label }}">{{ form.week_afternoon.label }}</label>
+                                    {% if form.week_afternoon.errors %}
+                                        <div class="text-danger" role="alert">{{ form.week_afternoon.errors.as_text }}</div>
+                                    {% endif %}
+                                    {{ form.week_afternoon }}
+                                </div>
+                                <div class="form-group has-feedback {% if form.weekend.errors %}has-error{% endif %}">
+                                    <label for="{{ form.weekend.id_for_label }}">{{ form.weekend.label }}</label>
+                                    {% if form.weekend.errors %}
+                                        <div class="text-danger" role="alert">{{ form.weekend.errors.as_text }}</div>
+                                    {% endif %}
+                                    {{ form.weekend }}
+                                </div>
+                                <div class="form-group has-feedback {% if form.resume.errors %}has-error{% endif %}">
+                                    <label for="{{ form.resume.id_for_label }}">{{ form.resume.label }}*</label>
+                                    {% if form.resume.errors %}
+                                        <div class="text-danger" role="alert">{{ form.resume.errors.as_text }}</div>
+                                    {% endif %}
+                                    {{ form.resume }}
+                                </div>
+                                <input type="submit" value="Enviar" class="btn btn-estavos">
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div> <!-- end col -->
+        </div> <!-- end row -->
+
+    </div> <!-- end container -->
+</section>
+<!-- main-container end -->
+
+{% endblock %}
+
+{% block js %}
+<!-- Google Maps javascript -->
+<script type="text/javascript" src="{{ STATIC_URL }}site/plugins/jquery.mask.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+    var maskBehavior = function (val) {
+            return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+        },
+        options = {
+             onKeyPress: function(val, e, field, options) {
+                 field.mask(maskBehavior.apply({}, arguments), options);
+             }
+        };
+
+    $('#id_phone').mask(maskBehavior, options);
+    $('#id_mobile').mask(maskBehavior, options);
+    $('#id_birth').mask('00/00/0000')
+});
+
+</script>
+{% endblock %}

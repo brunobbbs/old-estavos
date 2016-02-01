@@ -1,0 +1,133 @@
+{% load staticfiles %}
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ESTAVOS | Login</title>
+
+    <link href="{{ STATIC_URL }}system/css/bootstrap.min.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}system/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+    <link href="{{ STATIC_URL }}system/css/animate.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}system/css/style.css" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+
+    <div class="loginColumns animated fadeInDown">
+
+        {% if messages %}
+        <div class="row">
+            <div class="col-md-12">
+                  {% for message in messages %}
+                  <div class="alert alert-dismissible
+                              alert-{% if message.tags %}{{ message.tags }}{% else %}info{% endif %}" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Fechar">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                      {{ message }}
+                  </div>
+                  {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="row">
+            <div class="col-md-12">
+                {% if form.errors %}
+                    <div class="alert alert-danger alert-dismissible" role="alert">
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Fechar">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        <strong>Ops... há algo errado:</strong>
+                        Por favor, corrija o{{ form.errors|pluralize }} erro{{ form.errors|pluralize }} abaixo.
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-6">
+                <h2 class="font-bold">Academia ESTAVOS</h2>
+
+                <p>
+                    Este ambiente é exclusivo para Clientes, Instrutores e Alunos da ESTAVOS.
+                </p>
+
+                <p>
+                    <small>Se você é nosso cliente ou aluno e ainda não possui cadastro, <a href="#">clique aqui</a> e cadastre-se agora.</small>
+                </p>
+
+            </div>
+            <div class="col-md-6">
+                <div class="ibox-content">
+                    <form class="m-t" role="form" action="" method="post">
+                        {% csrf_token %}
+                        {% if form.non_field_errors %}
+                            <div class="alert alert-danger">
+                                {{ form.non_field_errors.as_text }}
+                            </div>
+                        {% endif %}
+                        <div class="form-group {% if form.email.errors %}has-error{% endif %}">
+                            {% if form.email.errors %}
+                                <div class="text-danger" role="alert">
+                                    {{ form.email.errors.as_text }}
+                                </div>
+                            {% endif %}
+                            {{ form.email }}
+                        </div>
+                        <div class="form-group {% if form.password.errors %}has-error{% endif %}">
+                            {% if form.password.errors %}
+                                <div class="text-danger" role="alert">
+                                    {{ form.password.errors.as_text }}
+                                </div>
+                            {% endif %}
+                            {{ form.password }}
+                        </div>
+                        <button type="submit" class="btn btn-primary block full-width m-b">Login</button>
+
+                        <a href="#">
+                            <small>Esqueceu sua senha?</small>
+                        </a>
+
+                        <p class="text-muted text-center">
+                            <small>Não tem uma conta?</small>
+                        </p>
+                        <a class="btn btn-sm btn-white btn-block" href="{% url 'accounts:auth_register' %}">Clique aqui e cadastre-se agora</a>
+                    </form>
+                    <p class="m-t">
+                        <small></small>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <hr/>
+        <div class="row">
+            <div class="col-md-6">
+                Copyright Academia ESTAVOS
+            </div>
+            <div class="col-md-6 text-right">
+               <small>© 2013-2015</small>
+            </div>
+        </div>
+    </div>
+
+<!-- Mainly scripts -->
+<script src="{{ STATIC_URL }}system/js/jquery-2.1.1.js"></script>
+<script src="{{ STATIC_URL }}system/js/bootstrap.min.js"></script>
+
+<!-- Custom and plugin javascript -->
+<script src="{{ STATIC_URL }}system/js/inspinia.js"></script>
+<script src="{{ STATIC_URL }}system/js/plugins/pace/pace.min.js"></script>
+
+</body>
+
+</html>

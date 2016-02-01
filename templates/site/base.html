@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
+<!--[if !IE]><!-->
+<html lang="en">
+<!--<![endif]-->
+	<head>
+		<meta charset="utf-8">
+    	<!-- Mobile Meta -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    	<meta http-equiv="content-language" content="pt-br">
+        <meta name="robots" content="index, follow">
+    	<meta name="description" content="Aulas de Xadrez em Brasília, Xadrez para crianças, Torneios de Xadrez e arbitragem oficial CBX.">
+        <meta name="keywords" content="Xadrez, Aulas de Xadrez, Crianças, Escola, Brasília, DF"/>
+    	<meta name="author" content="Bruno Barbosa">
+        <meta name="generator" content="Django">
+		<title>Academia ESTAVOS - {% block title %}Aulas de Xadrez em Brasília - DF{% endblock %}</title>
+
+
+		<!-- Favicon -->
+		<link rel="shortcut icon" href="{{ STATIC_URL }}site/images/favicon.ico">
+
+		<!-- Web Fonts -->
+		<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700,300&amp;subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+		<link href='http://fonts.googleapis.com/css?family=PT+Serif' rel='stylesheet' type='text/css'>
+
+		<!-- Bootstrap core CSS -->
+		<link href="{{ STATIC_URL }}site/bootstrap/css/bootstrap.css" rel="stylesheet">
+
+		<!-- Font Awesome CSS -->
+		<link href="{{ STATIC_URL }}site/fonts/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+		<!-- Fontello CSS -->
+		<link href="{{ STATIC_URL }}site/fonts/fontello/css/fontello.css" rel="stylesheet">
+
+		<!-- Plugins -->
+        <link href="{{ STATIC_URL }}site/plugins/rs-plugin/css/settings.css" media="screen" rel="stylesheet">
+		<link href="{{ STATIC_URL }}site/plugins/rs-plugin/css/extralayers.css" media="screen" rel="stylesheet">
+		<link href="{{ STATIC_URL }}site/plugins/magnific-popup/magnific-popup.css" rel="stylesheet">
+		<link href="{{ STATIC_URL }}site/css/animations.css" rel="stylesheet">
+		<link href="{{ STATIC_URL }}site/plugins/owl-carousel/owl.carousel.css" rel="stylesheet">
+
+		<!-- iDea core CSS file -->
+		<link href="{{ STATIC_URL }}site/css/style.css" rel="stylesheet">
+
+		<!-- Color Scheme (In order to change the color scheme, replace the red.css with the color scheme that you prefer)-->
+		<link href="{{ STATIC_URL }}site/css/skins/green.css" rel="stylesheet">
+
+		<!-- Custom css -->
+		<link href="{{ STATIC_URL }}site/css/custom.css" rel="stylesheet">
+
+		{% block css %}
+
+		{% endblock %}
+	</head>
+
+	<!-- body classes:
+			"boxed": boxed layout mode e.g. <body class="boxed">
+			"pattern-1 ... pattern-9": background patterns for boxed layout mode e.g. <body class="boxed pattern-1">
+	-->
+	<body class="front">
+		<!-- scrollToTop -->
+		<!-- ================ -->
+		<div class="scrollToTop"><i class="icon-up-open-big"></i></div>
+
+		<!-- page wrapper start -->
+		<!-- ================ -->
+		<div class="page-wrapper">
+
+
+			<!-- header start (remove fixed class from header in order to disable fixed navigation mode) -->
+			<!-- ================ -->
+			<header class="header fixed dark clearfix">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-3">
+
+							<!-- header-left start -->
+							<!-- ================ -->
+							<div class="header-left clearfix">
+
+								<!-- logo -->
+								<div class="logo">
+									<a href="{% url 'home' %}"><img id="logo" src="{{ STATIC_URL }}site/images/logo-horizontal.png" alt="ESTAVOS"></a>
+								</div>
+
+								<!-- name-and-slogan -->
+								<!-- <div class="site-slogan">
+									Especializada em Xadrez em Brasília!
+								</div> -->
+
+							</div>
+							<!-- header-left end -->
+
+						</div>
+						<div class="col-md-9">
+
+							<!-- header-right start -->
+							<!-- ================ -->
+							<div class="header-right clearfix">
+
+								<!-- main-navigation start -->
+								<!-- ================ -->
+								<div class="main-navigation animated">
+
+									<!-- navbar start -->
+									<!-- ================ -->
+									<nav class="navbar navbar-default" role="navigation">
+										<div class="container-fluid">
+
+											<!-- Toggle get grouped for better mobile display -->
+											<div class="navbar-header">
+												<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1">
+													<span class="sr-only">Toggle navigation</span>
+													<span class="icon-bar"></span>
+													<span class="icon-bar"></span>
+													<span class="icon-bar"></span>
+												</button>
+											</div>
+
+											<!-- Collect the nav links, forms, and other content for toggling -->
+											<div class="collapse navbar-collapse" id="navbar-collapse-1">
+												<ul class="nav navbar-nav navbar-right">
+													<li class="active">
+														<a href="{% url 'home' %}">Página Inicial</a>
+													</li>
+													<li>
+														<a href="{% url 'course:index' %}">Curso de Xadrez</a>
+													</li>
+                                                	<!--
+                                                    <li>
+														<a href="{% url 'about-us' %}">Quem somos</a>
+													</li>
+													-->
+													<li class="dropdown">
+                                                    <a href="{% url 'services:service-list' %}" class="dropdown-toggle" data-toggle="dropdown">Serviços</a>
+                                                    <ul class="dropdown-menu">
+                                                        {% for object in service_pages %}
+                                                        <li><a href="{{ object.get_absolute_url }}">{{ object.title }}</a></li>
+                                                        {% endfor %}
+														</ul>
+													</li>
+                                                    <li>
+														<a href="{% url 'contato' %}">Contato</a>
+													</li>
+												</ul>
+											</div>
+
+										</div>
+									</nav>
+									<!-- navbar end -->
+
+								</div>
+								<!-- main-navigation end -->
+
+							</div>
+							<!-- header-right end -->
+
+						</div>
+					</div>
+				</div>
+			</header>
+			<!-- header end -->
+
+			{% if messages %}
+	        <div class="row">
+	            <div class="col-md-12">
+	                  {% for message in messages %}
+	                  <div class="alert alert-dismissible
+	                              alert-{% if message.tags %}{{ message.tags }}{% else %}info{% endif %}" role="alert">
+	                    <button type="button" class="close" data-dismiss="alert" aria-label="Fechar">
+	                      <span aria-hidden="true">&times;</span>
+	                    </button>
+	                      {{ message }}
+	                  </div>
+	                  {% endfor %}
+	            </div>
+	        </div>
+	        {% endif %}
+
+			{% block content %}
+
+            {% endblock %}
+
+        	<!-- section start -->
+			<!-- ================ -->
+			<div class="section gray-bg text-muted footer-top clearfix">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-6">
+							{% if partners %}
+								<h2>Nossos parceiros</h2>
+								<div class="separator-2"></div>
+								<div class="owl-carousel clients">
+									{% for partner in partners %}
+										<div class="client">
+											<img src="{{ partner.logo.url }}" alt="{{ partner.alt }}">
+										</div>
+									{% endfor %}
+								</div>
+							{% endif %}
+						</div>
+						<div class="col-md-6">
+							<blockquote class="inline">
+                                <p class="margin-clear">{{ quote.quote }}</p>
+                                <footer><cite title="Source Title">{{ quote.author }} </cite></footer>
+							</blockquote>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- section end -->
+
+			<!-- footer start (Add "light" class to #footer in order to enable light footer) -->
+			<!-- ================ -->
+			<footer id="footer">
+
+				<!-- .footer start -->
+				<!-- ================ -->
+				<div class="footer">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="footer-content">
+									<div class="logo-footer"><img id="logo-footer" src="{{ STATIC_URL }}site/images/logo-horizontal-footer.png" alt="Academia ESTAVOS"></div>
+									<div class="row">
+										<div class="col-sm-6">
+											<p>Organizadora de Eventos Desportivos e Academia de Jogos Mentais e de Entretenimento LTDA. - ME</p>
+											<p>CNPJ: 18.157.637/0001-51</p>
+											<ul class="social-links circle">
+												<li class="facebook"><a target="_blank" href="http://www.facebook.com/EstavosOficial"><i class="fa fa-facebook"></i></a></li>
+												<li class="twitter"><a target="_blank" href="http://www.twitter.com/AcademiaEstavos"><i class="fa fa-twitter"></i></a></li>
+												<li class="googleplus"><a target="_blank" href="http://plus.google.com/+EstavosOficial"><i class="fa fa-google-plus"></i></a></li>
+												<li class="instagram"><a target="_blank" href="http://instagram.com/academiaestavos"><i class="fa fa-instagram"></i></a></li>
+											</ul>
+										</div>
+										<div class="col-sm-6">
+											<ul class="list-icons">
+												<li><i class="fa fa-map-marker pr-10"></i> Brasília, DF</li>
+												<li><i class="fa fa-phone pr-10"></i> (61) 8121-7870</li>
+												<li><i class="fa fa-phone pr-10"></i> (61) 9193-0933</li>
+												<li><i class="fa fa-envelope-o pr-10"></i> contato@estavos.com</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="space-bottom hidden-lg hidden-xs"></div>
+							<div class="col-sm-6 col-md-2">
+								<div class="footer-content">
+									<h2>Links</h2>
+									<nav>
+										<ul class="nav nav-pills nav-stacked">
+											<li><a href="{% url 'home' %}">Página Inicial</a></li>
+											<li><a href="{% url 'about-us' %}">Quem somos</a></li>
+											<li><a href="{% url 'services:service-list' %}">Serviços</a></li>
+											<li><a href="{% url 'contato' %}">Contato</a></li>
+											<li><a href="{% url 'workwithus' %}">Trabalhe conosco</a></li>
+											<li><a href="{% url 'dashboard:home' %}">Acesso</a></li>
+										</ul>
+									</nav>
+								</div>
+							</div>
+						</div>
+						<div class="space-bottom hidden-lg hidden-xs"></div>
+					</div>
+				</div>
+				<!-- .footer end -->
+
+				<!-- .subfooter start -->
+				<!-- ================ -->
+				<div class="subfooter">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-6">
+								<p>Copyright © 2013-2015 Academia ESTAVOS. All Rights Reserved</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- .subfooter end -->
+
+			</footer>
+			<!-- footer end -->
+
+		</div>
+		<!-- page-wrapper end -->
+
+		<!-- JavaScript files placed at the end of the document so the pages load faster
+		================================================== -->
+		<!-- Jquery and Bootstap core js files -->
+		<script type="text/javascript" src="{{ STATIC_URL }}site/plugins/jquery.min.js"></script>
+		<script type="text/javascript" src="{{ STATIC_URL }}site/bootstrap/js/bootstrap.min.js"></script>
+
+		<!-- Modernizr javascript -->
+		<script type="text/javascript" src="{{ STATIC_URL }}site/plugins/modernizr.js"></script>
+
+		<!-- Isotope javascript -->
+		<script type="text/javascript" src="{{ STATIC_URL }}site/plugins/isotope/isotope.pkgd.min.js"></script>
+
+		<!-- Owl carousel javascript -->
+		<script type="text/javascript" src="{{ STATIC_URL }}site/plugins/owl-carousel/owl.carousel.js"></script>
+
+		<!-- Magnific Popup javascript -->
+		<script type="text/javascript" src="{{ STATIC_URL }}site/plugins/magnific-popup/jquery.magnific-popup.min.js"></script>
+
+		<!-- Appear javascript -->
+		<script type="text/javascript" src="{{ STATIC_URL }}site/plugins/jquery.appear.js"></script>
+
+		<!-- Count To javascript -->
+		<script type="text/javascript" src="{{ STATIC_URL }}site/plugins/jquery.countTo.js"></script>
+
+		<!-- Parallax javascript -->
+		<script src="{{ STATIC_URL }}site/plugins/jquery.parallax-1.1.3.js"></script>
+
+		<!-- Contact form -->
+		<script src="{{ STATIC_URL }}site/plugins/jquery.validate.js"></script>
+
+		<!-- Initialization of Plugins -->
+		<script type="text/javascript" src="{{ STATIC_URL }}site/js/template.js"></script>
+
+		<!-- Google Analytics -->
+		<script>
+		  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+		  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+		  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+		  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+		  ga('create', 'UA-57444846-1', 'auto');
+		  ga('send', 'pageview');
+		</script>
+
+
+		<!-- Custom Scripts -->
+		<script type="text/javascript" src="{{ STATIC_URL }}site/js/custom.js"></script>
+
+    	{% block js %}
+
+    	{% endblock %}
+
+	</body>
+</html>

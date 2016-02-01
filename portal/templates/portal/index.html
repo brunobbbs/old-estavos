@@ -1,0 +1,230 @@
+{% extends 'site/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+    <!-- banner start -->
+			<!-- ================ -->
+			<div class="banner">
+
+				<!-- slideshow start -->
+				<!-- ================ -->
+				<div class="slideshow white-bg">
+
+					<!-- slider revolution start -->
+					<!-- ================ -->
+					<div class="slider-banner-container">
+						<div class="slider-banner-2 bullets-with-bg">
+							<ul>
+
+								<!-- slide 1 start -->
+								<li data-transition="fade" data-delay="18000" data-slotamount="7" data-masterspeed="3000" data-saveperformance="on" data-title="Slide 1" class="dark-translucent-bg">
+
+								<!-- main image -->
+								<img src="{% static 'portal/img/home-slider-1.jpg' %}"  alt="slidebg1" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+
+								<!-- LAYER NR. 1 -->
+								<div class="tp-caption very_large_text sfl tp-resizeme"
+									data-x="center"
+									data-y="70"
+									data-speed="600"
+									data-start="0"
+									data-end="20000"
+									data-endspeed="600">Curso de Xadrez para Iniciantes
+								</div>
+
+								<!-- LAYER NR. 2 -->
+								<div class="tp-caption small_thin_white sfr text-center tp-resizeme"
+									data-x="center"
+									data-y="170"
+									data-speed="600"
+									data-start="0"
+									data-end="20000"
+									data-endspeed="600">Saia na frente de seus concorrentes em <strong>testes, vestibulares, concursos</strong> e outras atividades de alto esforço intelectual. <br /> Nosso curso vai ajudar você a adquirir habilidades extraordinárias <br />que lhe ajudarão nas mais diversas situações que enfrentamos no dia-a-dia.
+								</div>
+
+								<!-- LAYER NR. 3 -->
+								<div class="tp-caption tp-resizeme sfl"
+									data-x="center"
+									data-y="300"
+									data-speed="600"
+									data-start="0"
+									data-end="20000"
+									data-endspeed="600"><a href="{% url 'course:index' %}" class="btn btn-default btn-lg">Quero saber mais <i class="fa fa-angle-double-right pl-10"></i></a>
+								</div>
+
+								</li>
+								<!-- slide 1 end -->
+
+								<!-- slide 2 start -->
+								<li data-transition="fade" data-delay="18000" data-slotamount="7" data-masterspeed="3000" data-saveperformance="on" data-title="Slide 2" class="dark-translucent-bg">
+
+								<!-- main image -->
+								<img src="{% static 'portal/img/home-slider-2.jpg' %}"  alt="slidebg1" data-bgposition="center top" data-bgfit="cover" data-bgrepeat="no-repeat">
+
+								<!-- LAYER NR. 1 -->
+								<div class="tp-caption very_large_text sfl tp-resizeme"
+									data-x="center"
+									data-y="70"
+									data-speed="600"
+									data-start="0"
+									data-end="20000"
+									data-endspeed="600">Especialistas no Esporte dos Reis
+								</div>
+
+								<!-- LAYER NR. 2 -->
+								<div class="tp-caption sfr small_thin_white text-center tp-resizeme"
+									data-x="center"
+									data-y="170"
+									data-speed="600"
+									data-start="0"
+									data-end="20000"
+									data-endspeed="600">Além dos nossos fantásticos projetos para fazer o Xadrez dar certo na sua <strong>escola</strong> <br /> nós também organizamos eventos de Xadrez na sua <strong>empresa</strong> <br /> e utilizamos nossa didática exclusiva para ensinar este nobre esporte as crianças do seu <strong>condomínio</strong>!
+								</div>
+
+								<!-- LAYER NR. 3 -->
+								<div class="tp-caption sfl tp-resizeme"
+									data-x="center"
+									data-y="300"
+									data-speed="600"
+									data-start="0"
+									data-end="20000"
+									data-endspeed="600"><a href="{% url 'services:service-list' %}" class="btn btn-default btn-lg">Veja onde atuamos <i class="fa fa-angle-double-right pl-10"></i></a>
+								</div>
+
+								</li>
+								<!-- slide 2 end -->
+
+							</ul>
+						</div>
+					</div>
+					<!-- slider revolution end -->
+
+				</div>
+				<!-- slideshow end -->
+
+			</div>
+			<!-- banner end -->
+
+<!-- section start -->
+<!-- ================ -->
+<div class="section clearfix">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<!-- page-top start-->
+				<!-- ================ -->
+				<div class="page-top object-non-visible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<h1 class="text-center title">Serviços</h1>
+								<div class="separator"></div>
+								<p class="text-center">Prezando sempre pela qualidade e excelência,
+                                    temos uma equipe preparada para atender as suas necessidades.</p>
+								<div class="row grid-space-20">
+									<div class="col-sm-12 col-md-4 col-md-push-4">
+										<img src="{% static 'portal/img/king.png' %}" alt="" class="object-non-visible" data-animation-effect="fadeInUp" data-effect-delay="0">
+									</div>
+                                    <div class="col-sm-6 col-md-4 col-md-pull-4">
+                                        {% for object in services_1 %}
+                                        <div class="box-style-3 right object-non-visible" data-animation-effect="fadeInUpSmall" data-effect-delay="0">
+                                            <div class="icon-container white-bg">
+                                                <i class="fa fa-check"></i>
+                                            </div>
+											<div class="body">
+                                                <h2><a href="{{ object.get_absolute_url }}" title="{{ object.title }}">{{ object.title }}</a></h2>
+                                                <p>{{ object.description }}</p>
+												<a href="{{ object.get_absolute_url }}" class="link"><span>Saiba mais</span></a>
+											</div>
+                                        </div>
+                                        {% endfor %}
+									</div>
+									<div class="col-sm-6 col-md-4">
+                                        {% for object in services_2 %}
+										<div class="box-style-3 object-non-visible" data-animation-effect="fadeInUpSmall" data-effect-delay="0">
+                                            <div class="icon-container white-bg">
+                                                <i class="fa fa-check"></i>
+                                            </div>
+											<div class="body">
+                                                <h2><a href="{{ object.get_absolute_url }}" title="{{ object.title }}">{{ object.title }}</a></h2>
+												<p>{{ object.description }}</p>
+                                                <a href="{{ object.get_absolute_url }}" class="link"><span>Saiba mais</span></a>
+											</div>
+										</div>
+                                        {% endfor %}
+									</div>
+
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- page-top end -->
+
+
+			</div>
+		</div>
+	</div>
+</div>
+<!-- section end -->
+
+<!-- page-top start -->
+<!-- ================ -->
+<div class="section parallax dark-translucent-bg parallax-bg-3">
+	<div class="container">
+		<div class="call-to-action">
+			<div class="row">
+				<div class="col-md-12">
+					<h1 class="title text-center">Xadrez - A ginástica da inteligência</h1>
+					<p class="text-center">Academia ESTAVOS - Formando verdadeiros campeões na Arte de Caíssa!</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- page-top end -->
+
+<!-- section start -->
+<!-- ================ -->
+{% if testimonials %}
+<div class="section light-translucent-bg parallax-bg-2">
+	<div class="owl-carousel content-slider">
+		{% for object in testimonials %}
+		<div class="testimonial">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-8 col-md-offset-2">
+						<h2 class="title">{{ object.title }}</h2>
+						<div class="testimonial-image">
+						{% if object.photo %}
+							<img src="{{ object.photo.url }}" alt="{{ object.author }}" title="{{ object.author }}" class="img-circle">
+						{% else %}
+							<img src="{{ STATIC_URL }}site/images/testimonial-1.jpg" alt="{{ object.author }}" title="{{ object.author }}" class="img-circle">
+						{% endif %}
+
+						</div>
+						<div class="testimonial-body">
+							<p>"{{ object.testimonial }}"</p>
+							<div class="testimonial-info-1">- {{ object.author }}</div>
+							<div class="testimonial-info-2">{{ object.complementary }}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+	</div>
+</div>
+{% endif %}
+<!-- section end -->
+
+
+{% endblock %}
+
+{% block js %}
+	<!-- jQuery REVOLUTION Slider  -->
+	<script type="text/javascript" src="{{ STATIC_URL }}site/plugins/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+	<script type="text/javascript" src="{{ STATIC_URL }}site/plugins/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+{% endblock %}

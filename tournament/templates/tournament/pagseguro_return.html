@@ -1,0 +1,110 @@
+{% extends 'site/base.html' %}
+
+{% load staticfiles %}
+{% load pagseguro %}
+
+{% block title %}Festival de Xadrez da Família | Brasília - DF{% endblock %}
+
+{% block content %}
+
+<!-- page-intro start-->
+<!-- ================ -->
+<div class="page-intro">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home pr-10"></i><a href="{% url 'home' %}">Página Inicial</a></li>
+					<li><a href="#">Torneios</a></li>
+					<li><a href="{% url 'tournament:chessfestival' %}">Festival de Xadrez</a></li>
+					<li class="active}">Pré-inscrição</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- page-intro end -->
+
+<!-- main-container start -->
+<!-- ================ -->
+    {% if inscription %}
+<section class="main-container"> <!-- main container -->
+
+    <div class="container"> <!-- container -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <!-- page-title start -->
+                <!-- ================ -->
+                <h1 class="page-title margin-top-clear">Parabéns! Recebemos sua {% if inscription.status != "3" %}pré-{% endif %}inscrição!</h1>
+                <!-- page-title end -->
+                <p>O número de identificação de sua inscrição é: <strong>{{ inscription.pk|stringformat:'03d' }}</strong><br/>
+                    Utilize ele se precisar entrar em contato.
+                </p>
+                <h2>Recebemos seu pedido!</h2>
+                <p>Confira abaixo os detalhes da sua compra:</p>
+                <div class="row">
+                    <div class="col-md-6">
+                    <table class="table cart table-hover table-condensed">
+                        <thead>
+                            <tr>
+                                <th colspan="2">{{ inscription.competition.name }}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-right"><strong>Status</strong></td>
+                                <td>{{ inscription.get_status_display }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right"><strong>Valor</strong></td>
+                                <td>R$ {{ transaction.grossAmount }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right"><strong>Código do PagSeguro</strong></td>
+                                <td>{{ transaction.code }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right"><strong>Meio de pagamento</strong></td>
+                                <td>{{ transaction.paymentMethod.type|payment_status }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        {% if inscription.status == "3" %}
+                            <p>Sua inscrição está confirmada!</p>
+                        {% else %}
+                        <p>Você receberá um email assim que a inscrição for confirmada.</p>
+                        {% endif %}
+                        {% with c_comp=inscription.competitors.count %}
+                        <p>O{{ c_comp|pluralize }} atleta{{ c_comp|pluralize }}
+                            abaixo est{{ c_comp|pluralize:'á,ão' }} {% if inscription.status != "3" %}pré-{% endif %}inscrito{{ c_comp|pluralize }}:</p>
+                        {% endwith %}
+                        <ul>
+                            {% for competitor in inscription.competitors.all %}
+                            <li>{{ competitor.name }} - {{ competitor.birth|date:'d/m/Y' }}</li>
+                            {% endfor %}
+                        </ul>
+                        <br/>
+                        <p>No caso de divergência de dados ou havendo dúvidas, fale conosco
+                            através de nossos <a href="{% url 'contato' %}">canais de atendimento</a>.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Enquanto isso, por que não da uma olhadinha no site e confere mais algumas coisas do que fazemos.</h4>
+                        <a href="{% url 'services:service-list' %}" class="btn btn-estavos"><i class="fa fa-star"> Conheça nossos serviços</i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div> <!-- /container -->
+
+</section> <!-- /main container -->
+    {% endif %}
+
+{% endblock %}

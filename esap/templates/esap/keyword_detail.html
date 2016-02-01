@@ -1,0 +1,64 @@
+{% extends 'system/base.html' %}
+
+{% block content %}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>ESAP - ESTAVOS Sistema de Aulas Particulares</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{% url 'dashboard:home' %}">Início</a>
+            </li>
+            <li>
+                ESAP
+            </li>
+            <li>
+                <a href="{% url 'dashboard:keywords' %}">Tags</a>
+            </li>
+            <li class="active">
+                <strong>{{ object.name }}</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="wrapper wrapper-content animated fadeInUp">
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>{{ object.name }}</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            <i class="fa fa-wrench"></i>
+                        </a>
+                        <ul class="dropdown-menu dropdown-user">
+                            <li>
+                                <a href="{% url 'dashboard:keyword_update' object.pk %}">Editar tag</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <div class="project-list">
+
+                        <table class="table table-hover" id="classes-list">
+                            <tbody>
+                            {% for object in object.classes_set.all %}
+                                {% include 'esap/classes_list_row.html' %}
+                            {% empty %}
+                            <tr><p><strong>Nenhuma aula cadastrada.</strong></p></tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}

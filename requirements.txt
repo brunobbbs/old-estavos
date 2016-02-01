@@ -1,0 +1,50 @@
+# for project
+# for deploy on webfaction: while read line; do easy_installX.Y $line; done < requirements.txt
+
+django==1.8.4
+django-staticfiles
+django-secure
+
+# Psycopg2
+# apt-get install libpq-dev
+psycopg2
+
+# PIL
+# apt-get install libjpeg-dev libfreetype6-dev zlib1g-dev libpng12-dev
+Pillow
+
+# Django debug toolbar only development
+# http://django-debug-toolbar.readthedocs.org/en/1.2.2/
+django-debug-toolbar
+
+# Django Admin Tools
+# https://django-admin-tools.readthedocs.org/en/latest/
+# http://www.pythondiary.com/reviews/django-fluent-dashboardV0.3.0.html
+# django-admin-tools
+
+
+# Django Summernote
+django-summernote
+
+# django-extra-views
+django-extra-views
+
+# Theme for django admin
+django-flat-theme
+
+# TinyMCE
+# http://django-tinymce.readthedocs.org/en/latest/installation.html
+django-tinymce
+
+# Django Forms Bootstrap
+django-forms-bootstrap
+
+# Django reCAPTCHA
+django-recaptcha
+
+# Django pagseguro
+django-pagseguro2
+
+
+django-jquery-ui
+django-import-export

@@ -1,0 +1,55 @@
+{% extends 'system/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>Festival de Xadrez da Família</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{% url 'dashboard:home' %}">Início</a>
+            </li>
+            <li>
+                <a href="#">Festival de Xadrez</a>
+            </li>
+            <li class="active">
+                <strong>Por categorias</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="wrapper wrapper-content animated fadeInUp">
+
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Atletas</h5>
+                </div>
+                <div class="ibox-content">
+                    <table class="table table-stripped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Data de nascimento</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Bruno Barbosa</td>
+                                <td>18/12/1989</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

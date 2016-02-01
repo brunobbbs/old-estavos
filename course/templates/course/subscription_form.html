@@ -1,0 +1,130 @@
+{% extends 'site/base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Curso de Xadrez para Iniciantes em Brasília - DF{% endblock %}
+
+{% block content %}
+
+<!-- page-intro start-->
+<!-- ================ -->
+<div class="page-intro">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home pr-10"></i><a href="{% url 'home' %}">Página Inicial</a></li>
+                    <li><a href="{% url 'course:index' %}">Curso de Xadrez para Iniciantes</a></li>
+                    <li class="active">Inscrição</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- page-intro end -->
+
+<!-- main-container start -->
+<!-- ================ -->
+<section class="main-container">
+
+<div class="container">
+    <div class="row">
+
+        <!-- main start -->
+        <!-- ================ -->
+        <div class="main col-md-12">
+
+            <h1>Faça sua inscrição</h1>
+            <div class="col-md-8 col-md-offset-2">
+                <form action="" method="post" id="coursesubscription-form" class="form form-horizontal">
+                    {% csrf_token %}
+                    {% include "core/form_snippet.html" %}
+                    {% for formset in inlines %}
+                            <div id="accordion" class="panel-group">
+                                <div class="panel panel-success">
+                                    <div id="photos" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            <table class="table table-bordered table-striped">
+                                            {% for form in formset %}
+                                                {% if forloop.first %}
+                                                    <thead>
+                                                        {% for field in form.visible_fields %}
+                                                            <th>{{ field.label }}</th>
+                                                        {% endfor %}
+                                                    </thead>
+                                                    <tbody>
+                                                {% endif %}
+
+                                                <tr class="{% cycle odd,even %}">
+                                                    {% for field in form.visible_fields %}
+                                                        <td>
+                                                            {% if forloop.first %}
+                                                                {% for hidden in form.hidden_fields %}
+                                                                    {{ hidden }}
+                                                                {% endfor %}
+                                                            {% endif %}
+
+                                                            {{ field.errors.as_ul }}
+                                                            {{ field }}
+                                                        </td>
+                                                    {% endfor %}
+                                                </tr>
+                                                {% if forloop.last %}
+                                                    </tbody>
+                                                {% endif %}
+                                            {% endfor %}
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                       {{ formset.management_form }}
+                       <div class="formset-prefix" style="display:none" prefix="{{ formset.prefix }}"></div>
+                    {% endfor %}
+                    <div class="row">
+                        <input type="submit" class="btn btn-estavos" value="Continuar" />
+                    </div>
+                </form>
+            </div>
+            <div class="space-bottom"></div>
+
+        </div>
+
+    </div>
+
+</div>
+			<!-- main-container end -->
+
+</section>
+
+{% endblock %}
+
+{% block js %}
+<script src="{% static 'site/js/jquery.formset.js' %}"></script>
+<script src="{{ STATIC_URL }}site/plugins/jquery.mask.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+
+    var maskBehavior = function (val) {
+            return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+        },
+        options = {
+             onKeyPress: function(val, e, field, options) {
+                 field.mask(maskBehavior.apply({}, arguments), options);
+             }
+        };
+
+    $('#id_phone').mask(maskBehavior, options);
+    $('#id_cpf').mask("999.999.999-99");
+    $('#id_birthday').mask("99/99/9999");
+
+    var prefix = $(".formset-prefix").attr('prefix');
+        $("#coursesubscription-form").find("tbody tr").formset({
+            prefix: prefix,
+            addText: "Adicionar outro",
+            deleteText: "Remover"
+        });
+});
+
+</script>
+{% endblock %}

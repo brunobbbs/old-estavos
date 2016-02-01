@@ -1,0 +1,6 @@
+{% load bootstrap_tags %}
+
+<form action="{% url 'dashboard:modules_add' %}" method="post" id="modules-add-form">
+    {% csrf_token %}
+    {{ form|as_bootstrap }}
+</form>

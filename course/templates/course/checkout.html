@@ -1,0 +1,112 @@
+{% extends 'site/base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Curso de Xadrez para Iniciantes em Brasília - DF{% endblock %}
+
+{% block content %}
+
+<!-- page-intro start-->
+<!-- ================ -->
+<div class="page-intro">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home pr-10"></i><a href="{% url 'home' %}">Página Inicial</a></li>
+                    <li><a href="{% url 'course:index' %}">Curso de Xadrez para Iniciantes</a></li>
+                    <li class="active">Checkout</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- page-intro end -->
+
+<!-- main-container start -->
+<!-- ================ -->
+<section class="main-container">
+
+<div class="container">
+    <div class="row">
+
+        <!-- main start -->
+        <!-- ================ -->
+        <div class="main col-md-12">
+
+            {% if subscription %}
+            <!-- page-title start -->
+            <!-- ================ -->
+            <h1 class="page-title margin-top-clear">Confirme sua inscrição</h1>
+            <!-- page-title end -->
+            <div class="space"></div>
+            <table class="table cart table-striped">
+                <thead>
+                    <tr>
+                        <th>Item </th>
+                        <th>Preço</th>
+                        <th>Quantidade</th>
+                        <th class="amount">Total </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="product">{{ subscription.course }} <small>Início em {{ subscription.course.start_date|date:"d/m/Y" }}</small></td>
+                        <td class="price">R$ {{ subscription.course.price }} </td>
+                        <td class="quantity">
+                            <div class="form-group">
+                                <input type="text" class="form-control" value="{{ subscription.students.count }}" disabled>
+                            </div>
+                        </td>
+                        <td class="amount">{{ total }}</td>
+                    </tr>
+                    <tr>
+                        <td class="total-quantity" colspan="3">Total</td>
+                        <td class="total-amount">{{ total }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="space-bottom"></div>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th colspan="2">Informações de inscrição </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Nome</td>
+                        <td class="information">{{ subscription.name }}</td>
+                    </tr>
+                    <tr>
+                        <td>Email</td>
+                        <td class="information">{{ subscription.email }} </td>
+                    </tr>
+                    <tr>
+                        <td>Telefone</td>
+                        <td class="information">{{ subscription.phone }}</td>
+                    </tr>
+                    {% for student in subscription.students.all %}
+                    <tr>
+                        <td>Aluno</td>
+                        <td class="information">{{ student.name }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <div class="space-bottom"></div>
+
+            <img src="{% static 'course/img/pagseguro.jpg' %}" alt="PagSeguro">
+            <a href="{% url 'course:pagseguro_payment' %}" class="btn btn-estavos"><i class="fa fa-shopping-cart"> pagar com PagSeguro</i></a>
+
+            {% endif %}
+        </div>
+        <!-- main end -->
+
+    </div>
+</div>
+			<!-- main-container end -->
+
+</section>
+
+{% endblock %}

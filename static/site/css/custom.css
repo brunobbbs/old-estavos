@@ -1,0 +1,27 @@
+/*
+Theme Name: iDea - Clean & Powerful Bootstrap Theme
+Author: HtmlCoder
+Author URI: http://www.htmlcoder.me
+Author e-mail: htmlcoder.me@gmail.com
+Version: 1.2.0
+Created: August 2014
+License URI: http://support.wrapbootstrap.com/
+File Description: Place here your custom CSS styles
+*/
+
+.btn-estavos {
+    background-color: #0c3c26;
+    color: #fff;
+}
+
+.parallax-chess-course-1 {
+	background: url("../images/parallax-course-1.jpg") 50% 0px no-repeat;
+}
+
+.parallax-chess-course-2 {
+    background: url("../images/parallax-course-2.jpg") 50% 0px no-repeat;
+}
+
+.tournament-info {
+    text-align: left;
+}

@@ -1,0 +1,57 @@
+{% extends 'system/base.html' %}
+
+{% load staticfiles %}
+
+{% block stylesheets %}
+    <link href="{{ STATIC_URL }}system/css/plugins/chosen/chosen.css" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>ESAP - ESTAVOS Sistema de Aulas Particulares</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{% url 'dashboard:home' %}">Início</a>
+            </li>
+            <li>
+                <a href="{% url 'dashboard:classes' %}">Aulas de Xadrez</a>
+            </li>
+            <li class="active">
+                <strong>Editar material</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+
+                <form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
+                    {% csrf_token %}
+                    {% include "core/form_snippet.html" %}
+                    <div class="row">
+                        <input type="submit" class="btn btn-primary" value="Salvar" />
+                    <a href="{% url 'dashboard:classes'  %}" class="btn btn-white">Cancelar</a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block js %}
+    <!-- Chosen -->
+    <script src="{{ STATIC_URL }}system/js/plugins/chosen/chosen.jquery.js"></script>
+    <script type="text/javascript">
+    $(document).ready(function(){
+        $(".chosen-select").chosen();
+    });
+    </script>
+{% endblock %}

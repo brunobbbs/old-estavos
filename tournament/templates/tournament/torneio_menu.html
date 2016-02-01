@@ -1,0 +1,66 @@
+{% load staticfiles %}
+
+<div class="sidebar">
+    <div class="block clearfix">
+        <h3 class="title">O Festival</h3>
+        <div class="separator"></div>
+        <nav>
+            <ul class="nav nav-pills nav-stacked">
+                <li id="nav-inscription"><a href="{% url 'tournament:chessfestival' %}">Inscrição</a></li>
+                <li id="nav-regulamento"><a href="{% url 'tournament:regulamento' %}">Regulamento</a></li>
+                <li id="nav-check"><a href="{% url 'tournament:check_inscription' %}">Verificar inscrição</a></li>
+                <li id="nav-check"><a href="{% url 'tournament:inscritos' %}">Relação de atletas confirmados</a></li>
+                <li><a href="{% url 'contato' %}">Contato</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="block clearfix">
+        <h3 class="title">Local</h3>
+        <div class="separator"></div>
+        <p><strong>SESI - Serviço Social da Indústria</strong></p>
+        <p>QNF 24 Área Especial - Taguatinga Norte</p>
+    </div>
+
+    <div class="block clearfix">
+        <h3 class="title">Regulamento</h3>
+        <div class="separator"></div>
+        <p>Faça o download do regulamento do Festival de Xadrez na íntegra</p>
+        <ul>
+            <li>
+                <a href="https://drive.google.com/file/d/0Bw4yZQsk46i1WWNhUHpmSzRkckE/view?usp=sharing">Por categorias</a>
+            </li>
+            <li>
+                <a href="https://drive.google.com/file/d/0Bw4yZQsk46i1c3p1TFc3N0taV1E/view?usp=sharing">Absoluto</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="block clearfix">
+        <h3 class="title">Apoio</h3>
+        <div class="separator"></div>
+        <div class="row">
+            <div class="col-sm-12">
+                <img src="{% static 'tournament/img/sesi.png' %}"
+                alt="SESI - Serviço Social da Indústria"/>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="col-sm-6">
+                <img src="{% static 'tournament/img/Logo-FBX.jpg' %}"
+                     alt="FBX - Federação Brasiliense de Xadrez"/>
+            </div>
+            <div class="col-sm-6">
+                <img src="{% static 'tournament/img/lbx.png' %}"
+                     alt="LBX - Liga Brasileira de Xadrez"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="block clearfix">
+        <h3 class="title">Realização</h3>
+        <div class="separator"></div>
+        <p><img src="{% static 'site/images/logo-horizontal-footer.png' %}" alt="ESTAVOS"/></p>
+    </div>
+</div>

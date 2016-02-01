@@ -1,0 +1,623 @@
+{% extends 'site/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<!-- page-intro start-->
+<!-- ================ -->
+<div class="page-intro">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<ol class="breadcrumb">
+					<li><i class="fa fa-home pr-10"></i><a href="{% url 'home' %}">Página Inicial</a></li>
+					<li><a href="#">Torneios</a></li>
+					<li class="active">Festival de Xadrez</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- page-intro end -->
+
+<!-- main-container start -->
+<!-- ================ -->
+<section class="main-container">
+
+	<div class="container">
+		<div class="row">
+
+            <!-- sidebar start -->
+            <aside class="col-md-3">
+                {% include 'tournament/torneio_menu.html' %}
+            </aside>
+            <!-- sidebar end -->
+
+			<!-- main start -->
+            <!-- ================ -->
+            <div class="main col-md-8">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <img src="{% static 'tournament/img/inscricoes-fxf.jpg' %}"
+                             alt="Inscrições Festival de Xadrez da Família"/>
+                    </div>
+                </div>
+                
+                <!-- page-title start -->
+                <!-- ================ -->
+                <div class="row section white-bg">
+                    <div class="col-md-12">
+                        <h1 class="page-title">Festival de Xadrez da Família</h1>
+                        <div class="separator"></div>
+                        
+                        <div class="col-md-6">
+                            <p>O Festival de Xadrez da Família vem para encerrar o ano de 2015 com chave de ouro.</p>
+                            <p>Nosso objetivo é aproximar pais, alunos e docentes em um festival de diversão com o melhor exercício para a mente.</p>
+                            <p>Não importa o seu nível, venha se divertir em uma competição saudável e aberta para todos.</p>
+                            {% if not inscription_today %}
+                            <p><a href="#"><strong>Faça já sua inscrição!</strong></a></p>
+                            {% endif %}
+                        </div>
+                        <div class="col-md-6">
+                            <img src="{% static 'tournament/img/torneio-interno-xadrez-sesi-2015.jpg' %}"
+                                 alt="Torneio de Xadrez da Família"/>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row section gray-bg">
+                    <div class="col-md-4">
+                        <div class="box-style-1 white-bg object-non-visible animated object-visible fadeInUpSmall">
+                            <i class="fa fa-calendar"></i>
+                            <h2 class="title">Dias restantes</h2>
+                            <span data-speed="3000" data-to="{{ left_days }}" class="stat-num counting">{{ left_days }}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="box-style-1 white-bg object-non-visible animated object-visible fadeInUpSmall">
+                            <i class="fa fa-users"></i>
+                            <h2 class="title">Atletas</h2>
+                            <span data-speed="3000" data-to="{{ competitors_number }}" class="stat-num counting">{{ competitors_number }}</span>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="box-style-1 white-bg object-non-visible animated object-visible fadeInUpSmall">
+                            <i class="fa fa-check-square-o"></i>
+                            <h2 class="title">Inscrições</h2>
+                            {% if not inscription_today %}
+                            <a href="#" class="btn btn-default">Inscrição</a>
+                            {% else %}
+                                {{ inscription_today }}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row section white-bg">
+                    <div class="col-md-12">
+                        <h1 class="title">Modalidades</h1>
+                        <hr />
+                        <p class="lead">O Festival de Xadrez da Família conta com <strong>2 (dois) torneios</strong>, um pela manhã e
+                        outro pela tarde, organizados da seguinte forma:</p>
+                    </div>
+                </div>
+                <div class="row section gray-bg">
+                    <div class="col-md-12">
+                        <div class="box-style-1 white-bg object-non-visible tournament-info" data-animation-effect="fadeInUpSmall" data-effect-delay="0">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h2><strong>Informações gerais</strong></h2>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div data-effect-delay="0" data-animation-effect="fadeInUpSmall" class="box-style-2 object-non-visible animated object-visible fadeInUpSmall">
+                                        <div class="icon-container">
+                                            <i class="fa fa-calendar"></i>
+                                        </div>
+                                        <div class="body">
+                                            <h2>Data</h2>
+                                            <p>O Festival de Xadrez da Família acontece no dia <strong>06 de Dezembro de 2015</strong></p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div data-effect-delay="0" data-animation-effect="fadeInUpSmall" class="box-style-2 object-non-visible animated object-visible fadeInUpSmall">
+                                        <div class="icon-container">
+                                            <i class="fa fa-dashboard"></i>
+                                        </div>
+                                        <div class="body">
+                                            <h2>Rítmo de jogo</h2>
+                                            <p>Xadrez Rápido</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div data-effect-delay="0" data-animation-effect="fadeInUpSmall" class="box-style-2 object-non-visible animated object-visible fadeInUpSmall">
+                                        <div class="icon-container">
+                                            <i class="fa fa-clock-o"></i>
+                                        </div>
+                                        <div class="body">
+                                            <h2>Cadência</h2>
+                                            <p><strong>15 minutos</strong> para cada jogador</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div data-effect-delay="0" data-animation-effect="fadeInUpSmall" class="box-style-2 object-non-visible animated object-visible fadeInUpSmall">
+                                        <div class="icon-container">
+                                            <i class="fa fa-list-ul"></i>
+                                        </div>
+                                        <div class="body">
+                                            <h2>Emparceiramento</h2>
+                                            <p>Sistema suíço</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div data-effect-delay="0" data-animation-effect="fadeInUpSmall" class="box-style-2 object-non-visible animated object-visible fadeInUpSmall">
+                                        <div class="icon-container">
+                                            <i class="fa fa-dollar"></i>
+                                        </div>
+                                        <div class="body">
+                                            <h2>Taxa de inscrição</h2>
+                                            <p>A taxa de inscrição é de R$ 20,00</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div data-effect-delay="0" data-animation-effect="fadeInUpSmall" class="box-style-2 object-non-visible animated object-visible fadeInUpSmall">
+                                        <div class="icon-container">
+                                            <i class="fa fa-file-text-o"></i>
+                                        </div>
+                                        <div class="body">
+                                            <h2>Regulamento</h2>
+                                            <p>Ao participar desse festival você concorda com todos os itens presentes no
+                                                <a href="{% url 'tournament:regulamento' %}">regulamento</a>.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="box-style-1 white-bg object-non-visible tournament-info" data-animation-effect="fadeInUpSmall" data-effect-delay="0">
+                            <h2><strong>Local</strong></h2>
+                            <p>O torneio acontece no SESI de Taguatinga Norte - Brasília - DF</p>
+                            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3838.840682948492!2d-48.07459238581651!3d-15.812346489040081!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x935a3330e5268c85%3A0xb160848a92e38e52!2sSt.+F+Norte+Qnf+24+Qnf+-+Taguatinga%2C+Bras%C3%ADlia+-+DF!5e0!3m2!1spt-BR!2sbr!4v1447951392911" width="100%" height="250" frameborder="0" style="border:0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="box-style-1 white-bg object-non-visible tournament-info" data-animation-effect="fadeInUpSmall" data-effect-delay="0">
+                            <h2><strong>Por categorias</strong> <small>Manhã</small></h2>
+                            <p><strong>Rodadas:</strong> 5 (cinco)</p>
+                            <p>Na modalidade por categorias, o torneio é organizado da seguinte forma:</p>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Categoria</th>
+                                        <th>Ano de Nascimento</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Sub-07</td>
+                                        <td>2008 em diante</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sub-09</td>
+                                        <td>2006 e 2007</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sub-12</td>
+                                        <td>2003, 2004 e 2005</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sub-15</td>
+                                        <td>2000, 2001 e 2002</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sub-18</td>
+                                        <td>1997, 1998 e 1999</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <hr/>
+                            <h3>Cronograma</h3>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Atividade</th>
+                                        <th>Horário</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Confirmação de Inscrição</td>
+                                        <td>08h00 às 08h45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Congresso Técnico</td>
+                                        <td>08h50</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Emparceiramento</td>
+                                        <td>08h55</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Rodada</th>
+                                        <th>Horário</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Primeira</td>
+                                        <td>09h00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Segunda</td>
+                                        <td>09h30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Terceira</td>
+                                        <td>10h00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Quarta</td>
+                                        <td>10h30</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Quinta</td>
+                                        <td>11h00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Atividade</th>
+                                        <th>Horário</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Cerimônia de premiação e encerramento</td>
+                                        <td>11h45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Encerramento do evento</td>
+                                        <td>12h00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p><em><small>* Os horários são previstos e podem sofrer alterações sem aviso prévio.</small></em></p>
+
+                            <hr/>
+                            <h3>Premiação</h3>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Sub-07</th>
+                                        <th>Prêmio</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Primeiro colocado</td>
+                                        <td><img src="{% static 'tournament/img/trofeu.png' %}" alt="Troféu"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Segundo colocado</td>
+                                        <td><img src="{% static 'tournament/img/medalha.png' %}" alt="Medalha"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Terceiro colocado</td>
+                                        <td><img src="{% static 'tournament/img/medalha.png' %}" alt="Medalha"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Sub-09</th>
+                                        <th>Prêmio</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Primeiro colocado</td>
+                                        <td><img src="{% static 'tournament/img/trofeu.png' %}" alt="Troféu"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Segundo colocado</td>
+                                        <td><img src="{% static 'tournament/img/medalha.png' %}" alt="Medalha"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Terceiro colocado</td>
+                                        <td><img src="{% static 'tournament/img/medalha.png' %}" alt="Medalha"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Sub-12</th>
+                                        <th>Prêmio</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Primeiro colocado</td>
+                                        <td><img src="{% static 'tournament/img/trofeu.png' %}" alt="Troféu"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Segundo colocado</td>
+                                        <td><img src="{% static 'tournament/img/medalha.png' %}" alt="Medalha"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Terceiro colocado</td>
+                                        <td><img src="{% static 'tournament/img/medalha.png' %}" alt="Medalha"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Sub-15</th>
+                                        <th>Prêmio</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Primeiro colocado</td>
+                                        <td><img src="{% static 'tournament/img/trofeu.png' %}" alt="Troféu"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Segundo colocado</td>
+                                        <td><img src="{% static 'tournament/img/medalha.png' %}" alt="Medalha"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Terceiro colocado</td>
+                                        <td><img src="{% static 'tournament/img/medalha.png' %}" alt="Medalha"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Sub-18</th>
+                                        <th>Prêmio</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Primeiro colocado</td>
+                                        <td><img src="{% static 'tournament/img/trofeu.png' %}" alt="Troféu"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Segundo colocado</td>
+                                        <td><img src="{% static 'tournament/img/medalha.png' %}" alt="Medalha"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Terceiro colocado</td>
+                                        <td><img src="{% static 'tournament/img/medalha.png' %}" alt="Medalha"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {% if not inscription_today %}
+                                    <a href="#" class="btn-default btn">Inscrição</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="box-style-1 white-bg object-non-visible tournament-info" data-animation-effect="fadeInUpSmall" data-effect-delay="0">
+                            <h2><strong>Absoluto</strong> <small>Tarde</small></h2>
+                            <p><strong>Rodadas:</strong> 7 (sete)</p>
+                            <p>Esta modalidade é aberta para todos os enxadristas interessados, sejam adultos ou crianças.</p>
+                            <h3>Cronograma</h3>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Atividade</th>
+                                        <th>Horário</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Confirmação de Inscrição</td>
+                                        <td>13h00 às 13h20</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Congresso Técnico</td>
+                                        <td>13h50</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Emparceiramento</td>
+                                        <td>13h55</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Rodada</th>
+                                        <th>Horário</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Primeira</td>
+                                        <td>14h00</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Segunda</td>
+                                        <td>14h40</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Terceira</td>
+                                        <td>15h10</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Quarta</td>
+                                        <td>15h40</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Quinta</td>
+                                        <td>16h10</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sexta</td>
+                                        <td>16h40</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Sétima</td>
+                                        <td>17h10</td>
+                                    </tr>
+
+                                </tbody>
+                            </table>
+
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Atividade</th>
+                                        <th>Horário</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Cerimônia de premiação e encerramento</td>
+                                        <td>17h45</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Encerramento do evento</td>
+                                        <td>18h00</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            <p><em><small>* Os horários são previstos e podem sofrer alterações sem aviso prévio.</small></em></p>
+
+                            <hr/>
+                            <h3>Premiação</h3>
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Classificação</th>
+                                        <th>Prêmio</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Primeiro colocado Absoluto</td>
+                                        <td><img src="{% static 'tournament/img/trofeu.png' %}" alt="Troféu"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Segundo colocado Absoluto</td>
+                                        <td><img src="{% static 'tournament/img/trofeu.png' %}" alt="Troféu"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Terceiro colocado Absoluto</td>
+                                        <td><img src="{% static 'tournament/img/trofeu.png' %}" alt="Troféu"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Quarto ao décimo colocados</td>
+                                        <td><img src="{% static 'tournament/img/medalha.png' %}" alt="Medalha"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Primeiro lugar <strong>Feminino</strong></td>
+                                        <td><img src="{% static 'tournament/img/medalha.png' %}" alt="Medalha"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Melhor aluno SESI classificado</td>
+                                        <td><img src="{% static 'tournament/img/medalha.png' %}" alt="Medalha"/></td>
+                                    </tr>
+                                     <tr>
+                                        <td>Melhor pai/mãe de aluno SESI classificado</td>
+                                        <td><img src="{% static 'tournament/img/medalha.png' %}" alt="Medalha"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            Melhor professor/treinador de Xadrez
+                                            (para professores que lecionam em escolas públicas ou particulares
+                                            do Distrito Federal
+                                        </td>
+                                        <td><img src="{% static 'tournament/img/medalha.png' %}" alt="Medalha"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Primeiro lugar Sub-18</td>
+                                        <td><img src="{% static 'tournament/img/medalha.png' %}" alt="Medalha"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Primeiro lugar Sub-15</td>
+                                        <td><img src="{% static 'tournament/img/medalha.png' %}" alt="Medalha"/></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Primeiro lugar Sub-12</td>
+                                        <td><img src="{% static 'tournament/img/medalha.png' %}" alt="Medalha"/></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {% if not inscription_today %}
+                                    <a href="#" class="btn-default btn">Inscrição</a>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                    </div>
+                </div>
+
+                <!--
+                <div class="row">
+                    <div class="col-md-12">
+                        Perguntas frequentes
+                    </div>
+                </div>
+                -->
+
+            </div>
+
+		</div>
+	</div>
+</section>
+<!-- main-container end -->
+
+{% endblock %}
+
+
+{% block js %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('#nav-inscription').addClass('active')
+        });
+    </script>
+{% endblock %}

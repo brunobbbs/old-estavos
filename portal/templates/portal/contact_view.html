@@ -1,0 +1,173 @@
+{% extends 'site/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<!-- banner start -->
+<!-- ================ -->
+<div class="banner">
+	<!-- google maps start -->
+	<div id="map-canvas"></div>
+	<!-- google maps end -->
+</div>
+<!-- banner end -->
+
+<!-- page-intro start-->
+<!-- ================ -->
+<div class="page-intro">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<ol class="breadcrumb">
+					<li><i class="fa fa-home pr-10"></i><a href="{% url 'home' %}">Página Inicial</a></li>
+					<li class="active">Contato</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- page-intro end -->
+
+<!-- main-container start -->
+<!-- ================ -->
+<section class="main-container">
+
+	<div class="container">
+		<div class="row">
+
+			<!-- main start -->
+			<!-- ================ -->
+			<div class="main col-md-8">
+
+				<!-- page-title start -->
+				<!-- ================ -->
+				<h1 class="page-title">Contato</h1>
+				<!-- page-title end -->
+				<p>Gostaria de falar conosco? Preencha o formulário abaixo e entre em contato!</p>
+				{% if messages %}
+					{% for message in messages %}
+					<div class="alert alert-{% if message.tags %}{{ message.tags }}{% endif %}" role="alert">
+					    <strong>Tudo certo!</strong>
+					    {{ message }}
+					</div>
+					{% endfor %}
+				{% endif %}
+				 {% if form.errors %}
+    				<div class="alert alert-danger">
+	    				<strong>Ops... Algo aconteceu:</strong>
+	    				Por favor, corrija o{{ form.errors|pluralize }} erro{{ form.errors|pluralize }} abaixo.
+    				</div>
+    			{% endif %}
+				<div class="contact-form">
+					<form role="form" method="post" action="">
+						<legend>Formulário de Contato</legend>
+						{% csrf_token %}
+						{{ form.non_field_errors }}
+						<div class="form-group has-feedback {% if form.name.errors %}has-error{% endif %}">
+							<label for="{{ form.name.id_for_label }}">{{ form.name.label }}*</label>
+							{% if form.name.errors %}
+								<div class="text-danger" role="alert">{{ form.name.errors.as_text }}</div>
+							{% endif %}
+							{{ form.name }}
+						</div>
+						<div class="form-group has-feedback {% if form.mail.errors %}has-error{% endif %}">
+							<label for="{{ form.mail.id_for_label }}">{{ form.mail.label }}*</label>
+							{% if form.mail.errors %}
+								<div class="text-danger" role="alert">{{ form.mail.errors.as_text }}</div>
+							{% endif %}
+							{{ form.mail }}
+						</div>
+						<div class="form-group has-feedback {% if form.phone.errors %}has-error{% endif %}">
+							<label for="{{ form.phone.id_for_label }}">{{ form.phone.label }}</label>
+							{% if form.phone.errros %}
+								<div class="text-danger" role="alert">{{ form.phone.errors.as_text }}</div>
+							{% endif %}
+							{{ form.phone }}
+						</div>
+						<div class="form-group has-feedback {% if form.subject.errors %}has-error{% endif %}">
+							<label for="{{ form.subject.id_for_label }}">{{ form.subject.label }}*</label>
+							{% if form.subject.errors %}
+								<div class="text-danger" role="alert">{{ form.subject.errors.as_text }}</div>
+							{% endif %}
+							{{ form.subject }}
+						</div>
+						<div class="form-group has-feedback {% if form.message.errors %}has-error{% endif %}">
+							<label for="{{ form.message.id_for_label }}">{{ form.message.label }}*</label>
+							{% if form.message.errors %}
+								<div class="text-danger" role="alert">{{ form.message.errors.as_text }}</div>
+							{% endif %}
+							{{ form.message }}
+						</div>
+						<div class="form-group has-feedback {% if form.cc_myself.errors %}has-error{% endif %}">
+							<label for="{{ form.cc_myself.id_for_label }}">{{ form.cc_myself.label }}</label>
+							{% if form.cc_myself.errors %}
+								<div class="text-danger" role="alert">{{ form.cc_myself.errors.as_text }}</div>
+							{% endif %}
+							{{ form.cc_myself }}
+						</div>
+						<div class="form-group has-feedback {% if form.captcha.errors %}has-error{% endif %}">
+							<label for="{{ form.captcha.id_for_label }}">{{ form.captcha.label }}</label>
+							{% if form.captcha.errors %}
+								<div class="text-danger" role="alert">{{ form.captcha.errors.as_text }}</div>
+							{% endif %}
+							{{ form.captcha }}
+						</div>
+						<input type="submit" value="Enviar" class="btn btn-estavos">
+					</form>
+				</div>
+			</div>
+			<!-- main end -->
+
+			<!-- sidebar start -->
+			<aside class="col-md-4">
+				<div class="sidebar">
+					<div class="side vertical-divider-left">
+						<h3 class="title">Academia ESTAVOS</h3>
+						<ul class="list">
+							<li><strong></strong></li>
+							<li><i class="fa fa-home pr-10"></i>Atendemos em todo o Distrito Federal</li>
+							<li><i class="fa fa-mobile pr-10 pl-5"></i>(61) 8121-7870</li>
+							<li><i class="fa fa-mobile pr-10 pl-5"></i>(61) 9193-0933</li>
+							<li><i class="fa fa-envelope pr-10"></i><a href="mailto:contato@estavos.com">contato@estavos.com</a></li>
+						</ul>
+						<ul class="social-links colored circle large">
+							<li class="facebook"><a target="_blank" href="https://facebook.com/EstavosOficial"><i class="fa fa-facebook"></i></a></li>
+							<li class="twitter"><a target="_blank" href="http://twitter.com/AcademiaEstavos"><i class="fa fa-twitter"></i></a></li>
+							<li class="googleplus"><a target="_blank" href="https://plus.google.com/+EstavosOficial/about"><i class="fa fa-google-plus"></i></a></li>
+							<li class="instagram"><a target="_blank" href="http://instagram.com/academiaestavos"><i class="fa fa-instagram"></i></a></li>
+						</ul>
+					</div>
+				</div>
+			</aside>
+			<!-- sidebar end -->
+
+		</div>
+	</div>
+</section>
+<!-- main-container end -->
+
+{% endblock %}
+
+{% block js %}
+<!-- Google Maps javascript -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}site/js/google.map.config.contact.js"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}site/plugins/jquery.mask.min.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+
+    var maskBehavior = function (val) {
+            return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+        },
+        options = {
+             onKeyPress: function(val, e, field, options) {
+                 field.mask(maskBehavior.apply({}, arguments), options);
+             }
+        };
+
+    $('#id_phone').mask(maskBehavior, options);
+});
+
+</script>
+{% endblock %}

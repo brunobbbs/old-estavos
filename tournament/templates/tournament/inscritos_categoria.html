@@ -1,0 +1,124 @@
+<div class="row">
+
+    <div class="main col-md-8">
+
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="page-title">Listagem de atletas por Categoria</h2>
+                <p><strong>Total de atletas inscritos</strong>: {{ count }}</p>
+
+                {% if sub_7 %}
+                <h3>Sub-07</h3>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Escola</th>
+                            <th>Data de nascimento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for competitor in sub_7 %}
+                        <tr>
+                            <td>{{ competitor.name|upper }}</td>
+                            <td>{{ competitor.school|upper }}</td>
+                            <td>{{ competitor.birth|date:'d/m/Y' }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+
+                {% if sub_9 %}
+                <h3>Sub-09</h3>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Escola</th>
+                            <th>Data de nascimento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for competitor in sub_9 %}
+                        <tr>
+                            <td>{{ competitor.name|upper }}</td>
+                            <td>{{ competitor.school|upper }}</td>
+                            <td>{{ competitor.birth|date:'d/m/Y' }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+
+                {% if sub_12 %}
+                <h3>Sub-12</h3>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Escola</th>
+                            <th>Data de nascimento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for competitor in sub_12 %}
+                        <tr>
+                            <td>{{ competitor.name|upper }}</td>
+                            <td>{{ competitor.school|upper }}</td>
+                            <td>{{ competitor.birth|date:'d/m/Y' }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+
+                {% if sub_15 %}
+                <h3>Sub-15</h3>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Escola</th>
+                            <th>Data de nascimento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for competitor in sub_15 %}
+                        <tr>
+                            <td>{{ competitor.name|upper }}</td>
+                            <td>{{ competitor.school|upper }}</td>
+                            <td>{{ competitor.birth|date:'d/m/Y' }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+
+                {% if sub_18 %}
+                <h3>Sub-18</h3>
+                <table class="table table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Escola</th>
+                            <th>Data de nascimento</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for competitor in sub_18 %}
+                        <tr>
+                            <td>{{ competitor.name|upper }}</td>
+                            <td>{{ competitor.school|upper }}</td>
+                            <td>{{ competitor.birth|date:'d/m/Y' }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% endif %}
+            </div>
+        </div>
+
+    </div>
+
+</div>

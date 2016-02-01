@@ -1,0 +1,127 @@
+{% extends 'system/base.html' %}
+
+{% load staticfiles %}
+
+{% block stylesheets %}
+    <link href="{{ STATIC_URL }}system/css/plugins/chosen/chosen.css" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>ESAP - ESTAVOS Sistema de Aulas Particulares</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{% url 'dashboard:home' %}">Início</a>
+            </li>
+            <li>
+                ESAP
+            </li>
+            <li>
+                <a href="{% url 'dashboard:classes' %}">Aulas de Xadrez</a>
+            </li>
+            {% if object %}
+            <li>
+                <a href="{% url 'dashboard:classes_detail' object.pk %}">{{ object.title }}</a>
+            </li>
+            {% endif %}
+            <li class="active">
+                <strong>{% if object %}Editar aula{% else %}Adicionar aula{% endif %}</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-content">
+
+                <form action="" method="post" class="form-horizontal" enctype="multipart/form-data" id="update-classes">
+                    {% csrf_token %}
+                    {% include "core/form_snippet.html" %}
+
+                    {% for formset in inlines %}
+                        <div class="panel-body">
+                            <div id="accordion" class="panel-group">
+                                <div class="panel panel-success">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a name="material-de-apoio"></a>
+                                                <a data-toggle="collapse" data-parent="#accordion" href="#materials">
+                                                    <i class="fa fa-file"></i>
+                                                    Material de apoio
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div id="materials" class="panel-collapse collapse in">
+                                            <div class="panel-body">
+                                                <table class="table table-bordered table-striped">
+                                                {% for form in formset %}
+                                                    {% if forloop.first %}
+                                                        <thead>
+                                                            {% for field in form.visible_fields %}
+                                                                <th>{{ field.label }}</th>
+                                                            {% endfor %}
+                                                        </thead>
+                                                        <tbody>
+                                                    {% endif %}
+
+                                                    <tr class="{% cycle odd,even %}">
+                                                        {% for field in form.visible_fields %}
+                                                            <td>
+                                                                {% if forloop.first %}
+                                                                    {% for hidden in form.hidden_fields %}
+                                                                        {{ hidden }}
+                                                                    {% endfor %}
+                                                                {% endif %}
+
+                                                                {{ field.errors.as_ul }}
+                                                                {{ field }}
+                                                            </td>
+                                                        {% endfor %}
+                                                    </tr>
+                                                    {% if forloop.last %}
+                                                        </tbody>
+                                                    {% endif %}
+                                                {% endfor %}
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                       {{ formset.management_form }}
+                       <div class="formset-prefix" style="display:none" prefix="{{ formset.prefix }}"></div>
+                    {% endfor %}
+                    <div class="row">
+                        <input type="submit" class="btn btn-primary" value="Salvar" />
+                        <a href="{% url 'dashboard:classes'  %}" class="btn btn-white">Cancelar</a>
+                    </div>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block js %}
+    <!-- Chosen -->
+    <script src="{{ STATIC_URL }}system/js/plugins/chosen/chosen.jquery.js"></script>
+    <script src="{{ STATIC_URL }}system/js/jquery.formset.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+        var prefix = $(".formset-prefix").attr('prefix');
+        $(".chosen-select").chosen();
+        $("#update-classes tbody tr").formset({
+            prefix: prefix,
+            addText: "Adicionar outro",
+            deleteText: "Remover"
+        });
+    });
+    </script>
+{% endblock %}

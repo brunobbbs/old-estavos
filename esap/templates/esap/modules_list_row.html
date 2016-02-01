@@ -1,0 +1,25 @@
+{% load esap_labels %}
+
+<tr>
+    <td class="modules-status">
+        <span class="{{ object.active|label_status_color }}">
+            {{ object.active|label_status }}
+        </span>
+    </td>
+    <td class="modules-title">
+        <a href="{% url 'dashboard:module_detail' object.pk %}">{{ object.title }}</a>
+    </td>
+    <td class="modules-level">
+        <span class="label label-{{ object.level|label_levels }}">{{ object.get_level_display|default_if_none:"Náo informado" }}</span>
+    </td>
+    <td class="modules-classes">
+        {% with classes_count=object.classes_count %}
+        <span class="label label-primary">{{ classes_count|default:"0" }}</span>
+        Aula{{ classes_count|pluralize:"s" }}
+        {% endwith %}
+    </td>
+    <td class="modules-actions">
+        <a href="{% url 'dashboard:module_detail' object.pk %}" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> Visualizar </a>
+        <a href="{% url 'dashboard:module_update' object.pk %}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Editar </a>
+    </td>
+</tr>

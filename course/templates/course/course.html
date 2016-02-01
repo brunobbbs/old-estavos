@@ -1,0 +1,849 @@
+{% extends 'site/base.html' %}
+
+{% load staticfiles %}
+
+{% block title %}Curso de Xadrez para Iniciantes em Brasília - DF{% endblock %}
+
+{% block content %}
+
+<!-- banner start -->
+<!-- ================ -->
+<div class="banner">
+    <div class="fixed-image" style="background-image:url({% static 'site/images/parallax-course-1.jpg' %});"></div>
+</div>
+<!-- banner end -->
+
+<!-- page-intro start-->
+<!-- ================ -->
+<div class="page-intro">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home pr-10"></i><a href="{% url 'home' %}">Página Inicial</a></li>
+                    <li class="active">Curso de Xadrez</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- page-intro end -->
+
+<!-- main-container start -->
+<!-- ================ -->
+<section class="main-container">
+
+    <div class="section clearfix">
+        <div class="container">
+            <div class="row">
+
+                <!-- main start -->
+                <!-- ================ -->
+                <div class="main col-md-12">
+
+
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            <div class="call-to-action">
+                                <h1 class="title">Curso de Xadrez para Iniciantes</h1>
+                                <p>Seja o próximo campeão! Matricule-se já no <strong>Curso de Xadrez para Iniciantes</strong> da Academia ESTAVOS!</p>
+                                <a class="btn btn-white more" data-toggle="modal" data-target="#saibamais">
+                                Saiba mais <i class="pl-10 fa fa-info"></i>
+                                </a>
+
+                                <!-- Modal -->
+                                <div class="modal fade" id="saibamais" tabindex="-1" role="dialog" aria-labelledby="saibaMais" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Fechar</span></button>
+                                                <h4 class="modal-title" id="saibaMais">Curso de Xadrez da ESTAVOS</h4>
+                                            </div>
+                                            <div class="modal-body">
+                                                <ul class="list-icons">
+                                                    <li><i class="icon-check"></i> Próximas turmas em Fev/2016.</li>
+                                                    <li><i class="icon-check"></i> 2 Turmas! Uma para adultos e outra para crianças</li>
+                                                    <li><i class="icon-check"></i> O pai que se matricula junto com o filho paga meia! Isso mesmo! Ganha 50% de desconto!</li>
+                                                    <li><i class="icon-check"></i> O curso acontece no <strong>Núcleo de Xadrez do Clube ASCADE</strong> - Setor de Clubes Sul - trecho 2</li>
+                                                    <li><i class="icon-check"></i> O APRENDA é composto de <strong>9 aulas</strong>, todas acontecem aos sábados pela manhã.</li>
+                                                    <li><i class="icon-check"></i> Nós oferecemos 2 (duas) reposições de aulas <strong>GRÁTIS!</strong> Assim mesmo que haja algum imprevisto você não perde nada!</li>
+                                                    <li><i class="icon-check"></i> Você ainda ganha um <strong>certificado exclusivo</strong> ao final do curso!</li>
+                                                </ul>
+                                                <p><strong>Está esperando o que para se inscrever? Estamos esperando por você!</strong></p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-sm btn-white" data-dismiss="modal"><i class="icon-check"></i> Continuar navegando</button>
+                                                <!--
+                                                <a href="{% url 'course:subscription' %}" class="btn btn-default contact">Quero me inscrever!</a>
+                                                -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--
+                                e
+                                <a href="{% url 'course:subscription' %}" class="btn btn-default contact">Inscreva-se agora!</a>
+                                -->
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- main end -->
+
+            </div>
+        </div>
+    </div>
+
+    <!-- section start -->
+    <!-- ================ -->
+    <div class="section parallax light-translucent-bg parallax-chess-course-2">
+        <div class="container">
+            <div class="call-to-action">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="title text-center">O xadrez é muito mais que um jogo</h1>
+                        <p class="text-center">É um excelente exercício mental!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- section end -->
+
+    <!-- section start -->
+    <!-- ================ -->
+    <div class="section clearfix">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="text-center">Você quer ser um vencedor?</h1>
+                    <div class="separator"></div>
+                    <p class="lead text-center">Saia na frente de seus concorrentes em testes, vestibulares, concursos e outras atividades
+                        de alto esforço intelectual</p>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h2 class="title">Xadrez didático e divertido!</h2>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <img src="{% static 'portal/img/chess-kids-1.png' %}" alt="">
+                                </div>
+                                <div class="col-md-6">
+                                    <p>Nosso curso vai ajudar você a adquirir habilidades extraordinárias que lhe ajudarão nas mais
+                                        diversas situações que enfrentamos no dia-a-dia.
+                                        Veja como o Xadrez pode ajudar você.</p>
+                                </div>
+                            </div>
+                            <p>A capacidade de pensar, decidir, de escolher é a principal habilidade que permitiu o ser humano evoluir até hoje.
+                                Somos os donos de nossos pensamentos, e isso ninguém pode nos subtrair. Pensar é o principal exercício que o esporte dos reis ensina.</p>
+                            <p>Não perca tempo e destaque-se em meio a multidão!</p>
+                            <!--
+                            <a href="{% url 'course:subscription' %}" class="btn btn-white">Quero me inscrever!</a>
+                            -->
+                            <div class="space hidden-md hidden-lg"></div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="panel-group panel-dark" id="accordion">
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+                                                <i class="fa fa-check"></i>Defina objetivos!
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseOne" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            Precisamos deles para traçar planos e metas para conquistarmos a tão sonhada vitória!
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" class="collapsed">
+                                                <i class="fa fa-check"></i>Aprenda a trabalhar em equipe
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseTwo" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            Você aprenderá de forma divertida como coordenar uma diversidade de estilos em prol de um objetivo
+                                            ao aprender a lidar com as diferenças do movimento de cada peça.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree" class="collapsed">
+                                                <i class="fa fa-check"></i>Faça um planejamento
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseThree" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            Para conquistarmos qualquer coisa na vida precisamos fazer um planejamento e no Xadrez não é diferente,
+                                            você aprenderá que é melhor um plano ruim do que nenhum plano.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour" class="collapsed">
+                                                <i class="fa fa-check"></i>Tenha segurança ao tomar decisões
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseFour" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            A todo momento tomamos decisões, seja de onde ir ou o que fazer, mas nem sempre nos sentimos seguros
+                                            para fazê-las. Você sabia que todos podem ser mais acertivos em suas decisões?
+                                            Você aprenderá brincando a ser mais seguro ao tomar decisões e aumentar o percentual de acertos.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseResponsability" class="collapsed">
+                                                <i class="fa fa-check"></i>Temos que te contar uma coisa sobre Responsabilidade
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="collapseResponsability" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            Com esse maravilhoso jogo, não existe o fator sorte, logo você é o único
+                                            responsável por todas as suas ações, entenda que a cada passo que se dá tudo muda ao seu redor.
+                                            Tenha responsabilidade com tudo o que for fazer, e saiba que não existem atalhos para o sucesso.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="panel panel-default">
+                                    <div class="panel-heading">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#bePatient" class="collapsed">
+                                                <i class="fa fa-check"></i>Tenha paciência
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="bePatient" class="panel-collapse collapse">
+                                        <div class="panel-body">
+                                            Não, não é paciência para esperar seu adversário terminar de jogar, você sabia que existem partidas
+                                            de Xadrez entre jogadores que terminam em menos de 1 minuto?
+                                            A paciência que falamos aqui é de entender que tudo leva um tempo para acontecer,
+                                            ninguém se torna um Michael Jordan no basquete da noite para o dia.
+                                            Você aprenderá através do erro/acerto/resultado a evoluir e analisar sua evolução.
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- section end -->
+
+    <!-- section start -->
+    <!-- ================ -->
+    <div class="section parallax light-translucent-bg parallax-chess-course-1">
+        <div class="container">
+            <div class="call-to-action">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h1 class="title text-center">Poderíamos ficar o dia todo falando de como o Xadrez
+                            vai mudar a sua vida, mas preferimos mostrar como fazer!</h1>
+                        <p class="text-center"> </p>
+                    </div>
+                    <!--
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <a href="{% url 'course:subscription' %}" class="btn btn-default btn-lg">Quero me inscrever!</a>
+                        </div>
+                    </div>
+                    -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- section end -->
+
+    <!-- page-top start-->
+    <!-- ================ -->
+    <!--
+    <div class="page-top object-non-visible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="text-center title">Ementa</h1>
+                    <div class="separator"></div>
+                    <p class="text-center">Veja o que você vai aprender.</p>
+                    <div class="row grid-space-10">
+                        <div class="col-sm-4">
+                            <div class="box-style-2">
+                                <div class="icon-container default-bg">
+                                    <i class="fa fa-check"></i>
+                                </div>
+                                <div class="body">
+                                    <h2>O que é o Xadrez? Idéias iniciais do jogo</h2>
+                                    <ul>
+                                        <li>Uma breve história sobre o Esporte dos Reis;</li>
+                                        <li>Apresentando o tabuleiro e suas Filas, Colunas e Diagonais;</li>
+                                        <li>Posicionamento inicial das peças;</li>
+                                        <li>Dinâmica dos movimentos e captura;</li>
+                                        <li>Movimento do Peão, o operário e sua filosofia;</li>
+                                        <li>Objetivo do jogo;</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="box-style-2">
+                                <div class="icon-container default-bg">
+                                    <i class="fa fa-check"></i>
+                                </div>
+                                <div class="body">
+                                    <h2>O movimento de cada tropa!</h2>
+                                    <ul>
+                                        <li>Movimento do Rei, o mais importante;</li>
+                                        <li>Movimento da Dama, a mais poderosa;</li>
+                                        <li>Movimento do Bispo, o arqueiro fiel;</li>
+                                        <li>Movimento da Torre, a bombarda;</li>
+                                        <li>Movimento do Cavalo, o saltador;</li>
+                                        <li>Valor relativo das peças;</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="box-style-2">
+                                <div class="icon-container default-bg">
+                                    <i class="fa fa-check"></i>
+                                </div>
+                                <div class="body">
+                                    <h2>Xeque e Xeque-Mate</h2>
+                                    <ul>
+                                        <li>Atacando o Rei, Xeque!</li>
+                                        <li>Como se livrar de um Xeque;</li>
+                                        <li>Xeque mate, renda-se majestade;</li>
+                                        <li>A técnica fatal: Mate da Escada;</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row grid-space-10">
+                        <div class="col-sm-4">
+                            <div class="box-style-2">
+                                <div class="icon-container default-bg">
+                                    <i class="fa fa-check"></i>
+                                </div>
+                                <div class="body">
+                                    <h2>Movimentos especiais e mates elementares</h2>
+                                    <ul>
+                                        <li>Roque, o Rei em segurança;</li>
+                                        <li>A promoção, persistência premiada;</li>
+                                        <li>Mates na sétima e oitava fila;</li>
+                                        <li>En Passant, não passes por meu ataque!</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="box-style-2">
+                                <div class="icon-container default-bg">
+                                    <i class="fa fa-check"></i>
+                                </div>
+                                <div class="body">
+                                    <h2>Normas internacionais e o relógio</h2>
+                                    <ul>
+                                        <li>As leis do Xadrez, o que a FIDE diz sobre o jogo;</li>
+                                        <li>O relógio de Xadrez, suas regras e utilização;</li>
+                                        <li>Formatos de torneios;</li>
+                                        <li>Batalha orientada;</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="box-style-2">
+                                <div class="icon-container default-bg">
+                                    <i class="fa fa-check"></i>
+                                </div>
+                                <div class="body">
+                                    <h2>A língua internacional do Xadrez</h2>
+                                    <ul>
+                                        <li>Notação Algébrica, o idioma do Xadrez;</li>
+                                        <li>Modalidades de Xadrez pelos ritmos de jogo;</li>
+                                        <li>A partida anotada, remontando uma partida clássica;</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row grid-space-10">
+                        <div class="col-sm-4">
+                            <div class="box-style-2">
+                                <div class="icon-container default-bg">
+                                    <i class="fa fa-check"></i>
+                                </div>
+                                <div class="body">
+                                    <h2>As fases de uma partida</h2>
+                                    <ul>
+                                        <li>A abertura, como começar com pé direito;</li>
+                                        <li>Meio-jogo, quando a tática e estratégia se desenvolvem;</li>
+                                        <li>Final, onde um erro pode custar toda a partida;</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="box-style-2">
+                                <div class="icon-container default-bg">
+                                    <i class="fa fa-check"></i>
+                                </div>
+                                <div class="body">
+                                    <h2>Como conduzir a batalha e erros a não se cometer no começo</h2>
+                                    <ul>
+                                        <li>Partidas miniaturas, as armadilhas que podem aparecer logo no começo;</li>
+                                        <li>Partidas clássicas, seguindo os passos dos mestres;</li>
+                                        <li>Como praticar e estudar xadrez mesmo sem parceiros;</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="box-style-2">
+                                <div class="icon-container default-bg">
+                                    <i class="fa fa-check"></i>
+                                </div>
+                                <div class="body">
+                                    <h2>GUERRA! A hora de colocar em prática seus novos conhecimentos</h2>
+                                    <ul>
+                                        <li>Apresentação dos seminários;</li>
+                                        <li>Torneio de encerramento e entrega de certificados;</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    -->
+    <!-- page-top end -->
+    <div data-animation-effect="fadeInUpSmall" data-effect-delay="100">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="text-center title">Local</h1>
+                    <div class="separator"></div>
+                    <p class="text-center">Nos encontramos no <strong>Núcleo de Xadrez do Clube ASCADE</strong> - <a href="https://goo.gl/maps/036p4" target="_blank">Setor de Clubes trecho 2, Asa Sul, Brasília - DF</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- google maps start -->
+    <div id="map-canvas"></div>
+    <!-- google maps end -->
+
+    <!-- section start -->
+    <!-- ================ -->
+    <div class="section parallax dark-translucent-bg parallax-chess-course-2">
+        <div class="container">
+            <div class="call-to-action">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h1 class="title text-center">Próximas turmas em Fevereiro - 2016</h1>
+                        <h2>Deixe seu email e lhe avisaremos assim que as novas turmas forem abertas!</h2>
+                        <p class="text-center">Não se preocupe, nós também odiamos SPAM!</p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <!--
+                            <a href="{% url 'course:subscription' %}" class="btn btn-default btn-lg">Quero me inscrever!</a>
+                            -->
+                            <button type="button" class="btn btn-default btn-lg" data-toggle="modal" data-target="#courselead">
+                                Quero ficar sabendo!
+                            </button>
+
+                            <!-- Modal -->
+                            <div class="modal fade" id="courselead" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                              <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="myModalLabel">Fique informado de quando haverá novas turmas</h4>
+                                  </div>
+                                  <div class="modal-body">
+                                      <p>Informe seu email abaixo e saiba em primeira mão quando abriremos novas turmas.</p>
+                                      <p>E não se preocupe, nós também odiamos SPAM!</p>
+
+                                      <form method="post">
+                                          {% csrf_token %}
+                                          {{ form.as_p }}
+                                          <button type="submit" class="btn btn-default">Mantenha-me informado</button>
+                                      </form>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- section end -->
+
+    <!-- ================ -->
+    <!--
+    <div class="page-top object-non-visible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="text-center title">Qual o investimento?</h1>
+                    <div class="separator"></div>
+                    <p class="text-center">Nossa missão é levar o Xadrez para todas as pessoas! Pense diferente e destaque-se!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    -->
+    <!-- pricing tables start -->
+    <!--
+    <div class="pricing-tables stripped object-non-visible" data-animation-effect="fadeInUpSmall">
+        <div class="row grid-space-0">
+            <div class="col-sm-4 plan col-sm-offset-4 stripped best-value">
+                <div class="header">
+                    <div class="small">Em até</div>
+                    <div class="price"><span>3</span>x</div>
+                    <h3>R$ 149,90</h3>
+                    <div class="small">sem juros!</div>
+                </div>
+                <ul>
+                    <li>9 Encontros</li>
+                    <li>Início imediato</li>
+                    <li>Aulas práticas e divertidas!</li>
+                    <li>Acontece aos sábados, a partir das 9h</li>
+                    <li>Certificado de conclusão</li>
+                    <li><a class="btn btn-default" href="{% url 'course:subscription' %}"><i class="fa fa-shopping-cart pr-10"></i>Quero me inscrever!</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    -->
+    <!-- pricing tables end -->
+
+    <!-- ================ -->
+    <div class="page-top object-non-visible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="text-center title">Perguntas frequentes</h1>
+                    <div class="separator"></div>
+                    <p class="text-center">Não fique com dúvidas, veja abaixo as perguntas mais frequentes e se desejar entre em contato!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- accordion start -->
+
+    <div class="page-top object-non-visible" data-animation-effect="fadeInUpSmall" data-effect-delay="100">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+
+                    <div class="tabs-style-2">
+                        <!-- Nav tabs -->
+                        <ul role="tablist" class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" role="tab" href="#course" aria-expanded="true"><i class="fa fa-home pr-5"></i>Sobre o curso</a></li>
+                            <li class=""><a data-toggle="tab" role="tab" href="#chess" aria-expanded="false"><i class="fa fa-user pr-5"></i>Xadrez</a></li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div id="course" class="tab-pane fade active in">
+                                <div id="faq-course" class="panel-group panel-dark">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a href="#faqcurso1" data-parent="#faq-course" data-toggle="collapse">
+                                                    <i class="fa fa-check"></i>Qual objetivo do curso?
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div class="panel-collapse collapse in" id="faqcurso1">
+                                            <div class="panel-body">
+                                                <p>O objetivo do curso é auxiliar o aluno, através da prática do Xadrez, o desenvolvimento de habilidades cognitivas como <strong>atenção, concentração, raciocínio lógico, memória, organização de ideias, imaginação, antecipação, espírito de decisão, autocontrole, disciplina, perseverança</strong>, dentre outros.</p>
+                                                <p>Ao final do curso, o aluno estará apto não só a conhecer os movimentos das peças e as regras do jogo, mas também conceitos fundamentais para a condução correta de um partida de Xadrez através de suas três fases: <strong>Abertura, meio-jogo e final</strong>.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="collapsed" href="#faqcurso2" data-parent="#faq-course" data-toggle="collapse">
+                                                    <i class="fa fa-check"></i>Quem é o público alvo?
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div class="panel-collapse collapse" id="faqcurso2">
+                                            <div class="panel-body">
+                                                <p>O curso de Xadrez da Academia ESTAVOS é voltado para todos que desejam obter os incríveis benefícios que este jogo-esporte-ciência proporciona.</p>
+                                                <p>Crianças a partir de <strong>6 anos</strong> estão aptas a participar.</p>
+                                                <p>Nós temos <strong>duas turmas abertas</strong>, uma para adultos e outra para crianças!</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="collapsed" href="#faqcurso3" data-parent="#faq-course" data-toggle="collapse">
+                                                    <i class="fa fa-check"></i>Como funciona?
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div class="panel-collapse collapse" id="faqcurso3">
+                                            <div class="panel-body">
+                                                <p>O curso é <strong>presencial</strong> e temos duas turmas abertas com início imediato.</p>
+                                                <p>A turma das crianças acontece de 9h às 10h30</p>
+                                                <p>A turma dos adultos acontece de 10h30 às 12h00</p>
+                                                <p>Venha fazer uma <strong>aula experimental grátis!</strong></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="collapsed" href="#faqcurso4" data-parent="#faq-course" data-toggle="collapse">
+                                                    <i class="fa fa-check"></i>Onde acontece?
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div class="panel-collapse collapse" id="faqcurso4">
+                                            <div class="panel-body">
+                                                <p>O curso acontece no <strong>Núcleo de Xadrez do clube ASCADE</strong></p>
+                                                <p><i class="fa fa-map-marker"></i> SCES Trecho 2, Conjunto 10, Lote 18 - Asa Sul, Brasília - DF</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="collapsed" href="#faqcurso5" data-parent="#faq-course" data-toggle="collapse">
+                                                    <i class="fa fa-check"></i>Posso começar a qualquer momento?
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div class="panel-collapse collapse" id="faqcurso5">
+                                            <div class="panel-body">
+                                                <p>Sim. A ESTAVOS possui um método especial de ensino herdado dos ensinamentos das artes marciais em que o curso é focado na prática e interação social entre os alunos, o que permite que um aluno comece hoje sem perca de conteúdo.</p>
+                                                <p>Além disso, nós ainda oferecemos 2 (duas) reposições de aula inteiramente grátis, caso você não consiga assistir à alguma das aulas.</p>
+                                                <!--
+                                                <p>Não perca tempo, <a href="{% url 'course:subscription' %}">inscreva-se já</a>!</p>
+                                                -->
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="collapsed" href="#faqcurso6" data-parent="#faq-course" data-toggle="collapse">
+                                                    <i class="fa fa-check"></i>Recebo certificado?
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div class="panel-collapse collapse" id="faqcurso6">
+                                            <div class="panel-body">
+                                                <p>Sim! Todos os alunos inscritos recebem certificado desde que obtenha presença em pelo menos 75% dos encontros.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="collapsed" href="#faqcurso7" data-parent="#faq-course" data-toggle="collapse">
+                                                    <i class="fa fa-check"></i>Não sei nada de Xadrez, posso participar?
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div class="panel-collapse collapse" id="faqcurso7">
+                                            <div class="panel-body">
+                                                <p>Com certeza! O curso é voltado para aqueles que ainda não tiveram contato com o jogo, bem como para aqueles que conhecem os movimentos e regras básicas mas desejam buscar uma base sólida para aperfeiçoar seu jogo.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="collapsed" href="#faqcurso8" data-parent="#faq-course" data-toggle="collapse">
+                                                    <i class="fa fa-check"></i>Ainda tem dúvidas? Entre em contato!
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div class="panel-collapse collapse" id="faqcurso8">
+                                            <div class="panel-body">
+                                                <p>Estamos à disposição para lhe atender!</p>
+                                                <p>(61) 8121-7870 / (61) 9193-0933</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="chess" class="tab-pane fade">
+                                <div id="faq-chess" class="panel-group panel-dark">
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a href="#faq1" data-parent="#faq-chess" data-toggle="collapse">
+                                                    <i class="fa fa-check"></i>O que é Xadrez?
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div class="panel-collapse collapse in" id="faq1">
+                                            <div class="panel-body">
+                                                Xadrez é uma emocionante batalha com exércitos de cavaleiros, torres, arqueiros e corajosos guerreiros
+                                                compartilhando um mesmo objetivo, aprisionar o rei adversário e vencer a batalha.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="collapsed" href="#faq2" data-parent="#faq-chess" data-toggle="collapse">
+                                                    <i class="fa fa-check"></i>O Xadrez ajuda nos estudos?
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div class="panel-collapse collapse" id="faq2">
+                                            <div class="panel-body">
+                                                <p>Sim! Pesquisas apontam que estudantes que jogam xadrez têm uma <strong>melhoria de 15% em provas de matemática</strong> após o início da prática.</p>
+                                                <p>Em sua visita ao Brasil no ano de 2010, Garry Kasparov - ex-campeão mundial de Xadrez, fundador da Fundação Kasparov para o Xadrez Escolar, instituição patrocinada pela UNESCO, referiu-se a uma das pesquisas sobre as consequências do ensino sistemático do Xadrez no ensino infantil feita na Alemanha, em que se concluiu: <strong>Em turmas em que se tinha mais aulas de matemática do que de Xadrez e outras que se tinha mais aulas de Xadrez do que matemática, essas últimas conseguiam aprender melhor matemática</strong>.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="collapsed" href="#faq3" data-parent="#faq-chess" data-toggle="collapse">
+                                                    <i class="fa fa-check"></i>Quais habilidades são trabalhadas com Xadrez?
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div class="panel-collapse collapse" id="faq3">
+                                            <div class="panel-body">
+                                                O Xadrez trabalha naquele que o pratica, uma série de habilidades cognitivas tais como <strong>atenção, concentração, raciocínio lógico, memória, organização de ideias, efetuarimaginação, antecipação, espírito de decisão, autocontrole, disciplina, perseverança</strong>, dentre outros.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="collapsed" href="#faq4" data-parent="#faq-chess" data-toggle="collapse">
+                                                    <i class="fa fa-check"></i>A partir de qual idade eu posso aprender?
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div class="panel-collapse collapse" id="faq4">
+                                            <div class="panel-body">
+                                                O Xadrez é recomendado para todas as faixas etárias. Crianças podem tirar proveito do jogo <strong>a partir de 6 anos de idade</strong>.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="collapsed" href="#faq5" data-parent="#faq-chess" data-toggle="collapse">
+                                                    <i class="fa fa-check"></i>Não tenho paciência, Xadrez não é para mim?
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div class="panel-collapse collapse" id="faq5">
+                                            <div class="panel-body">
+                                                Essa é uma das maiores falácias a respeito deste nobre jogo-esporte-ciência. Não é preciso ter paciência para jogar Xadrez, este é um dos atributos que você adquire com a prática do esporte.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="panel panel-default">
+                                        <div class="panel-heading">
+                                            <h4 class="panel-title">
+                                                <a class="collapsed" href="#faq6" data-parent="#faq-chess" data-toggle="collapse">
+                                                    <i class="fa fa-check"></i>Tenho TDAH, posso aprender Xadrez?
+                                                </a>
+                                            </h4>
+                                        </div>
+                                        <div class="panel-collapse collapse" id="faq6">
+                                            <div class="panel-body">
+                                                Sim. Pesquisas apontam que o jogo de xadrez é um excelente aliado no tratamento do Transtorno de Déficit de Atenção e Hiperatividade (TDAH). Maior concentração em sala de aula e desenvolvimento mais rápido do raciocínio são alguns dos benefícios de quem joga.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- section start -->
+    <!-- ================ -->
+    <!--
+    <div class="section gray-bg">
+        <div class="container">
+            <div class="call-to-action">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h1 class="title text-center">Não perca tempo, matricule-se já!</h1>
+                        <p class="text-center"> </p>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="text-center">
+                            <a href="{% url 'course:subscription' %}" class="btn btn-default btn-lg">Quero me inscrever</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- section end -->
+
+
+</section>
+<!-- main-container end -->
+
+{% endblock %}
+
+{% block js %}
+<!-- Google Maps javascript -->
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;sensor=false"></script>
+<script type="text/javascript" src="{{ STATIC_URL }}site/js/google.map.config.ascade.js"></script>
+
+<script type="text/javascript" src="{{ STATIC_URL }}site/plugins/jquery.mask.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+
+    var maskBehavior = function (val) {
+            return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
+        },
+        options = {
+             onKeyPress: function(val, e, field, options) {
+                 field.mask(maskBehavior.apply({}, arguments), options);
+             }
+        };
+
+    $('#id_phone').mask(maskBehavior, options);
+});
+
+</script>
+{% endblock %}

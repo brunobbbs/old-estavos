@@ -1,0 +1,270 @@
+{% extends 'system/base.html' %}
+
+{% load staticfiles %}
+{% load esap_labels %}
+
+{% block stylesheets %}
+    <link href="{{ STATIC_URL }}system/css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}system/css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}system/css/plugins/chosen/chosen.css" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>ESAP - ESTAVOS Sistema de Aulas Particulares</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{% url 'dashboard:home' %}">Início</a>
+            </li>
+            <li>
+                ESAP
+            </li>
+            <li>
+                <a href="{% url 'dashboard:classes' %}">Aulas de Xadrez</a>
+            </li>
+            <li class="active">
+                <strong>{{ object.title }}</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-9">
+        <div class="wrapper wrapper-content animated fadeInUp">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="m-b-md">
+                                <a href="{% url 'dashboard:classes_update' object.pk %}" id="edit_classes" class="btn btn-white btn-xs pull-right">Editar aula</a>
+                                <h2>{{ object.title }}</h2>
+                            </div>
+                            <dl class="dl-horizontal">
+                                <dt>Status:</dt> <dd><span class="{{ object.status|label_status_color }}">{{ object.status|label_status }}</span></dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-5">
+                            <dl class="dl-horizontal">
+
+                                <dt>Autor:</dt> <dd>{{ object.author.get_full_name }}</dd>
+                                <dt>Duração:</dt> <dd>{{ object.time }} minutos</dd>
+                                <dt>Categoria:</dt> <dd>{{ object.get_category_display }}</dd>
+                                <dt>Nível:</dt> <dd>{{ object.get_level_display }}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-lg-7" id="cluster_info">
+                            <dl class="dl-horizontal" >
+
+                                <dt>Modificado:</dt> <dd>{{ object.modified }} <span class="small">por {{ object.last_update.get_full_name }}</span></dd>
+                                <dt>Criado:</dt> <dd>{{ object.created }}</dd>
+                                <dt>Palavras-chave:</dt>
+                                <dd>
+                                    <ul class="tag-list" style="padding: 0">
+                                    {% for tag in object.keywords.all %}
+                                        <li>
+                                            <a href="{% url 'dashboard:keyword_detail' tag.slug %}">
+                                                <i class="fa fa-tag"></i>
+                                                {{ tag.name }}
+                                            </a>
+                                        </li>
+                                    {% empty %}
+                                        <p class="small">Nenhuma palvra-chave informada</p>
+                                    {% endfor %}
+                                    </ul>
+                                </dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="row m-t-sm">
+                        <div class="col-lg-12">
+                            <div class="panel blank-panel">
+                                <div class="panel-heading">
+                                    <div class="panel-options">
+                                        <ul class="nav nav-tabs">
+                                            <li class="active"><a href="#tab-0" data-toggle="tab">Conteúdo proposto</a></li>
+                                            <li class=""><a href="#tab-1" data-toggle="tab">Objetivos</a></li>
+                                            <li class=""><a href="#tab-2" data-toggle="tab">Didática</a></li>
+                                            <li class=""><a href="#tab-3" data-toggle="tab">Método</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tab-0">
+                                            <div class="ibox float-e-margins">
+                                                <div class="ibox-title">
+                                                    <div class="ibox-tools">
+                                                        <button id="edit_content"
+                                                                class="btn btn-primary btn-xs m-l-sm"
+                                                                onclick="edit('content', 'classes_content')"
+                                                                type="button">Atualizar</button>
+                                                        <button id="save_content"
+                                                                style="display:none;"
+                                                                class="btn btn-success btn-xs m-l-sm"
+                                                                onclick="save('content', 'classes_content')"
+                                                                type="button">Salvar</button>
+                                                    </div>
+                                                </div>
+                                                <div class="ibox-content" id="classes_content">
+                                                     {{ object.content|safe }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="tab-1">
+
+                                            <div class="ibox float-e-margins">
+                                                <div class="ibox-title">
+                                                    <div class="ibox-tools">
+                                                        <button id="edit_objective"
+                                                                class="btn btn-primary btn-xs m-l-sm"
+                                                                onclick="edit('objective', 'classes_objectives')"
+                                                                type="button">Atualizar</button>
+                                                        <button id="save_objective"
+                                                                style="display:none;"
+                                                                class="btn btn-success btn-xs m-l-sm"
+                                                                onclick="save('objective', 'classes_objectives')"
+                                                                type="button">Salvar</button>
+                                                    </div>
+                                                </div>
+                                                <div class="ibox-content" id="classes_objectives">
+                                                     {{ object.objective|safe }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="tab-2">
+                                            <div class="ibox float-e-margins">
+                                                <div class="ibox-title">
+                                                    <div class="ibox-tools">
+                                                        <button id="edit_didatic"
+                                                                class="btn btn-primary btn-xs m-l-sm"
+                                                                onclick="edit('didatic', 'classes_didatic')"
+                                                                type="button">Atualizar</button>
+                                                        <button id="save_didatic"
+                                                                style="display:none;"
+                                                                class="btn btn-success btn-xs m-l-sm"
+                                                                onclick="save('didatic', 'classes_didatic')"
+                                                                type="button">Salvar</button>
+                                                    </div>
+                                                </div>
+                                                <div class="ibox-content" id="classes_didatic">
+                                                     {{ object.didatic|safe }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="tab-3">
+                                            <div class="ibox float-e-margins">
+                                                <div class="ibox-title">
+                                                    <div class="ibox-tools">
+                                                        <button id="edit_method"
+                                                                class="btn btn-primary btn-xs m-l-sm"
+                                                                onclick="edit('method', 'classes_method')"
+                                                                type="button">Atualizar</button>
+                                                        <button id="save_method"
+                                                                style="display:none;"
+                                                                class="btn btn-success btn-xs m-l-sm"
+                                                                onclick="save('method', 'classes_method')"
+                                                                type="button">Salvar</button>
+                                                    </div>
+                                                </div>
+                                                <div class="ibox-content" id="classes_method">
+                                                     {{ object.method|safe }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-3">
+        <div class="wrapper wrapper-content project-manager">
+            <h4>{{ object.title }}</h4>
+            <p class="small">{{ object.description }}</p>
+            <h5>Materiais de apoio</h5>
+            <ul class="list-unstyled project-files">
+            {% for file in materials %}
+                <li>
+                    <a href="{{ file.file.url }}" target="_blank">
+                        <i class="fa fa-file"></i>
+                        {{ file.title }}
+                    </a>
+                </li>
+            {% endfor %}
+            </ul>
+            <div class="text-center m-t-md">
+                <a href="{% url 'dashboard:classes_update' object.pk %}#material-e-apoio"
+                   class="btn btn-xs btn-primary">Adicionar arquivos</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="display:none;">
+    <form id="update_fields"
+          action="{% url 'dashboard:classes_ajax_update' object.pk %}">
+        {% csrf_token %}
+        <input type="hidden" name="category" value="{{ object.category }}" />
+        <input type="hidden" name="level" value="{{ object.level }}" />
+        <input type="hidden" name="time" value="{{ object.time }}" />
+        <input type="hidden" name="title" value="{{ object.title }}" />
+        <input type="hidden" id="field_content" name="content" value="{{ object.content }}" />
+        <input type="hidden" id="field_objective" name="objective" value="{{ object.objective }}" />
+        <input type="hidden" id="field_didatic" name="didatic" value="{{ object.didatic }}" />
+        <input type="hidden" id="field_method" name="method" value="{{ object.method }}" />
+    </form>
+</div>
+
+{% endblock content %}
+
+{% block js %}
+    <script src="{{ STATIC_URL }}system/js/plugins/summernote/summernote.min.js"></script>
+    <script src="{{ STATIC_URL }}system/js/plugins/chosen/chosen.jquery.js"></script>
+
+    <script type="text/javascript">
+        function updateClass(field, content){
+            $("#update_fields #field_" + field).attr("value", content);
+            $.ajax({
+                type: "POST",
+                url: $("#update_fields").attr("action"),
+                data: $("#update_fields").serialize(),
+                dataType: "json",
+                beforeSend: function () {
+                    $("body").spin();
+                },
+                success: function(content) {
+                    console.log(content);
+                },
+                error: function(errormsg) {
+                    alert(errormsg);
+                },
+                complete: function(data) {
+                    $("body").spin(false);
+                }
+            });
+            return
+        }
+        var edit = function(field, element_id) {
+            $('#' + element_id).summernote({focus: true});
+            $("#edit_" + field).hide();
+            $("#save_" + field).show();
+        };
+        var save = function(field, element_id) {
+            var element = '#' + element_id;
+            var aHTML = $(element).code();
+            $(element).destroy();
+            updateClass(field, aHTML);
+            $("#edit_" + field).show();
+            $("#save_" + field).hide();
+        };
+
+    </script>
+{% endblock js %}

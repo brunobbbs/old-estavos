@@ -1,0 +1,172 @@
+{% extends 'system/base.html' %}
+
+{% load staticfiles %}
+{% load esap_labels %}
+
+{% block stylesheets %}
+    <link href="{{ STATIC_URL }}system/css/plugins/chosen/chosen.css" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>ESAP - ESTAVOS Sistema de Aulas Particulares</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{% url 'dashboard:home' %}">Início</a>
+            </li>
+            <li>
+                <a href="{% url 'dashboard:classes' %}">ESAP</a>
+            </li>
+            <li class="active">
+                <strong>Aulas de Xadrez</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="wrapper wrapper-content animated fadeInUp">
+
+            <div class="ibox">
+                <div class="ibox-title">
+                    <h5>Aulas cadastradas</h5>
+                    <div class="ibox-tools">
+                        <a href="{% url 'dashboard:classes_ajax_form' %}" id="add-class"
+                           class="btn btn-primary btn-xs"
+                           data-target="#myModal"
+                           data-toogle="modal">Adicionar aula</a>
+                    </div>
+                    <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true" data-keyboard="false" data-backdrop="static">
+                        <div class="modal-dialog">
+                        <div class="modal-content animated bounceInRight">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    <i class="fa fa-delicious modal-icon"></i>
+                                    <h4 class="modal-title">Aulas de Xadrez</h4>
+                                    <small class="font-bold">Use o formulário abaixo para cadastrar novas aulas de Xadrez.</small>
+                                </div>
+                                <div class="modal-body">
+
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                                    <button type="button" class="btn btn-primary" id="add-classes">Salvar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <!--
+                    <div class="row m-b-sm m-t-sm">
+                        <div class="col-md-1">
+                            <button type="button" id="loading-btn" class="btn btn-white btn-sm" ><i class="fa fa-refresh"></i> Atualizar</button>
+                        </div>
+                        <div class="col-md-11">
+                            <div class="input-group"><input type="text" placeholder="Buscar" class="input-sm form-control"> <span class="input-group-btn">
+                                <button type="button" class="btn btn-sm btn-primary"> Pesquisar!</button> </span></div>
+                        </div>
+                    </div>
+                    -->
+
+                    <div class="project-list">
+
+                        <table class="table table-hover" id="classes-list">
+                            <tbody>
+                            {% for object in object_list %}
+                                {% include 'esap/classes_list_row.html' %}
+                            {% empty %}
+                            <tr><p><strong>Nenhuma aula cadastrada.</strong></p></tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+
+                        {% include "core/pagination.html" %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block js %}
+    <!-- Chosen -->
+    <script src="{{ STATIC_URL }}system/js/plugins/chosen/chosen.jquery.js"></script>
+
+    <script type="text/javascript">
+    $(document).ready(function(){
+
+        $(".aulas-de-xadrez").attr('class', 'active');
+
+        $("#add-class").click(function(event) {
+            event.preventDefault();
+            classesModal(this);
+        });
+        $("#add-classes").click(function(){
+            var frm = $("#classes-add-form");
+            $.ajax({
+                type: "POST",
+                url: frm.attr('action'),
+                data: frm.serialize(),
+                dataType: "json",
+                beforeSend: function () {
+                    $("#myModal").spin();
+                },
+                success: function(content) {
+                    updateTable(content);
+                },
+                error: function(errormsg) {
+                    alert(errormsg);
+                },
+                complete: function() {
+                    $("#myModal").spin(false);
+                }
+            });
+        });
+        $(".aulas").attr('class', 'active');
+    });
+    function updateTable(content) {
+        $("#myModal").modal('hide');
+        var pk = content.pk;
+        $.ajax({
+            type: "GET",
+            url: '/painel/aulas/ajax/' + pk,
+            success: function(content) {
+                $("#classes-list tbody").prepend(content);
+            },
+            error: function(errormsg) {
+                alert(errormsg);
+            },
+            complete: function(data) {
+                $("#myModal").spin(false);
+            }
+        });
+    }
+    function classesModal(object) {
+        var url = $(object).attr('href');
+        $.ajax({
+            type: "GET",
+            url: url,
+            beforeSend: function () {
+                $("body").spin();
+            },
+            success: function(content) {
+                $(".modal-body").html(content);
+                $(".chosen-select").chosen({width:"100%"});
+            },
+            error: function(errormsg) {
+                alert(errormsg);
+            },
+            complete: function() {
+                $("#myModal").modal('show');
+                $("body").spin(false);
+            }
+        });
+    }
+    </script>
+{% endblock js %}

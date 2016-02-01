@@ -1,0 +1,65 @@
+{% extends 'system/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <div class="ibox-tools">
+                        <a href="{% url 'dashboard:classes' %}" id="list-class"
+                           class="btn btn-primary btn-xs"
+                           data-toogle="modal">Listar aulas</a>
+                    </div>
+                    <h5>Aulas de Xadrez</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">{{ classes_count }}</h1>
+                    <small>Aula{{ classes_count|pluralize:"s" }} cadastrada{{ classes_count|pluralize:"s" }}</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <div class="ibox-tools">
+                        <a href="{% url 'dashboard:modules' %}" id="list-class"
+                           class="btn btn-primary btn-xs"
+                           data-toogle="modal">Listar módulos</a>
+                    </div>
+                    <h5>Módulos</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">{{ modules_count }}</h1>
+                    <small>Módulo{{ modules_count|pluralize:"s" }} cadastrado{{ modules_count|pluralize:"s" }}</small>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-3">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Festival de Xadrez</h5>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="no-margins">{{ festival_inscriptions }}</h1>
+                    <small>Atleta{{ festival_inscriptions|pluralize }} inscrito{{ festival_inscriptions|pluralize }}</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(document).ready(function(){
+            $(".inicio").attr('class', 'active');
+        });
+    </script>
+{% endblock js %}

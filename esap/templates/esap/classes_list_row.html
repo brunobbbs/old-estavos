@@ -1,0 +1,29 @@
+{% load esap_labels %}
+
+<tr>
+    <td class="classes-level">
+        <span class="label label-{{ object.category|label_category }}">{{ object.get_category_display|default_if_none:"Náo informado" }}</span>
+    </td>
+    <td class="classes-title">
+        <a href="{% url 'dashboard:classes_detail' object.pk %}">{{ object.title }}</a>
+        <br/>
+        <small><strong>Nível</strong>: {{ object.get_level_display }} {% if object.new %}<span class="badge badge-warning-light">Novo</span>{% endif %}</small>
+    </td>
+    <td class="classes-keywords">
+        <ul style="padding: 0" class="tag-list">
+            {% for keyword in object.keywords.all %}
+                <li><a href="{% url 'dashboard:keyword_detail' keyword.slug %}"><i class="fa fa-tag"></i> {{ keyword.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </td>
+    <td class="classes-support-material">
+        {% with materials_count=object.materials_count %}
+        <span class="label label-primary">{{ materials_count|default:"0" }}</span>
+        Materia{{ materials_count|pluralize:"l,is" }} complementar{{ materials_count|pluralize:"es" }}
+        {% endwith %}
+    </td>
+    <td class="classes-actions">
+        <a href="{% url 'dashboard:classes_detail' object.pk %}" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> Visualizar </a>
+        <a href="{% url 'dashboard:classes_update' object.pk %}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Editar </a>
+    </td>
+</tr>

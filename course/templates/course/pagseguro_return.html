@@ -1,0 +1,96 @@
+{% extends 'site/base.html' %}
+
+{% load staticfiles %}
+{% load pagseguro %}
+
+{% block title %}Curso de Xadrez para Iniciantes em Brasília - DF{% endblock %}
+
+{% block content %}
+
+<!-- page-intro start-->
+<!-- ================ -->
+<div class="page-intro">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <ol class="breadcrumb">
+                    <li><i class="fa fa-home pr-10"></i><a href="{% url 'home' %}">Página Inicial</a></li>
+                    <li><a href="{% url 'course:index' %}">Curso de Xadrez para Iniciantes</a></li>
+                    <li class="active">Pagamento</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- page-intro end -->
+
+<!-- main-container start -->
+<!-- ================ -->
+<section class="main-container"> <!-- main container -->
+
+    <div class="container"> <!-- container -->
+
+        <div class="row">
+            <div class="col-md-12">
+                <!-- page-title start -->
+                <!-- ================ -->
+                <h1 class="page-title margin-top-clear">Parabéns! Você acaba de fazer um excelente investimento!</h1>
+                <!-- page-title end -->
+                <p>Estamos felizes em poder lhe mostrar como o Esporte dos Reis poderá melhorar sua vida.</p>
+                <h2>Recebemos seu pedido!</h2>
+                <p>Confira abaixo os detalhes da sua compra:</p>
+                <div class="row">
+                    <div class="col-md-6">
+                    <table class="table cart table-hover table-condensed">
+                        <thead>
+                            <tr>
+                                <th colspan="2">Curso de Xadrez para Iniciantes</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-right"><strong>Status</strong></td>
+                                <td>{{ subscription.get_status_display }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right"><strong>Valor</strong></td>
+                                <td>R$ {{ transaction.grossAmount }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right"><strong>Código do PagSeguro</strong></td>
+                                <td>{{ transaction.code }}</td>
+                            </tr>
+                            <tr>
+                                <td class="text-right"><strong>Meio de pagamento</strong></td>
+                                <td>{{ transaction.paymentMethod.type|payment_status }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        {% if subscription.status == "3" %}
+                            <p>Sua inscrição está confirmada!</p>
+                        {% else %}
+                        <p>Assim que recebermos a confirmação de pagamento nós lhe enviaremos um email confirmando sua matrícula. Isso pode levar de 1 a 2 dias úteis ok?</p>
+                        {% endif %}
+                        <p>Lembramos que nosso primeiro encontro será no dia <strong>03/10/2015 (Sábado)</strong> das <strong>9h às 12h</strong> no <strong>Núcleo de Xadrez do Clube ASCADE</strong></p>
+                        <p>O endereço é Setor de Clubes Sul - trecho 2, Conjunto 10, Lote 18 - Asa Sul, Brasília - DF.</p>
+                        <p>Se tiver qualquer dúvida, não deixe de entrar em <a href="{% url 'contato' %}">contato</a>.</p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4>Enquanto isso, por que não da uma olhadinha no site e confira mais algumas coisas que fazemos.</h4>
+                        <a href="{% url 'services:service-list' %}" class="btn btn-estavos"><i class="fa fa-star"> Veja o que fazemos</i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div> <!-- /container -->
+
+</section> <!-- /main container -->
+
+{% endblock %}

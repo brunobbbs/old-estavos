@@ -1,0 +1,96 @@
+{% extends 'system/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>ESAP - ESTAVOS Sistema de Aulas Particulares</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{% url 'dashboard:home' %}">Início</a>
+            </li>
+            <li>
+                ESAP
+            </li>
+            <li>
+                <a href="{% url 'dashboard:particularclients' %}">Clientes particulares</a>
+            </li>
+            <li class="active">
+                <strong>{{ object.user.get_full_name }}</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="wrapper wrapper-content animated fadeInUp">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="m-b-md">
+                                <a href="{% url 'dashboard:particularclient_update' object.pk %}" id="edit_particularclient" class="btn btn-white btn-xs pull-right">Editar cliente</a>
+                                <h2>{{ object.user.get_full_name }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <dl class="dl-horizontal">
+                                <dt>Nome completo:</dt>
+                                <dd>
+                                {% if object.fullname %}
+                                    {{ object.fullname }}
+                                {% else %}
+                                    {{ object.user.get_full_name }}
+                                {% endif %}
+                                </dd>
+                                <dt>Email:</dt> <dd>{{ object.user }}</dd>
+                                <dt>Profissão:</dt> <dd>{{ object.occupation }}</dd>
+                                <dt>Estado:</dt> <dd>{{ object.state }}</dd>
+                                <dt>Cidade:</dt> <dd>{{ object.city }}</dd>
+                                <dt>Bairro:</dt> <dd>{{ object.district }}</dd>
+                                <dt>Endereço:</dt> <dd>{{ object.address }}</dd>
+                                <dt>Complemento:</dt> <dd>{{ object.complement }}</dd>
+                                <dt>CEP:</dt> <dd>{{ object.cep }}</dd>
+                            </dl>
+                        </div>
+                        <div class="col-lg-6" id="cluster_info">
+                            <dl class="dl-horizontal" >
+                                <dt>RG:</dt> <dd>{{ object.rg }}</dd>
+                                <dt>Órgão emissor:</dt> <dd>{{ object.uf_sender }}</dd>
+                                <dt>CPF:</dt> <dd>{{ object.cpf }}</dd>
+                                <dt>Telefone:</dt>
+                                    <dd>
+                                        {{ object.phone1 }}
+                                        {% if object.phone2 %}
+                                            {{ object.phone2 }}
+                                        {% endif %}
+                                    </dd>
+                                <dt>Nacionalidade:</dt> <dd>{{ object.nationality }}</dd>
+                                <dt>Estado civil:</dt> <dd>{{ object.marital_status }}</dd>
+                                <dt>Naturalidade:</dt> <dd>{{ object.naturality }}</dd>
+                                <dt>UF Naturalidade:</dt> <dd>{{ object.uf_naturality }}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
+
+{% block js %}
+
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $(".clientes-particulares").attr('class', 'active');
+    });
+    </script>
+
+{% endblock %}

@@ -1,0 +1,161 @@
+{% extends 'site/base.html' %}
+
+{% load staticfiles %}
+{% load static %}
+
+{% block css %}
+<link rel='stylesheet' type='text/css' href='{% static 'css/jquery-ui/smoothness/jquery-ui.css' %}' />
+{% endblock %}
+
+{% block content %}
+
+<!-- page-intro start-->
+<!-- ================ -->
+<div class="page-intro">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<ol class="breadcrumb">
+					<li><i class="fa fa-home pr-10"></i><a href="{% url 'home' %}">Página Inicial</a></li>
+					<li><a href="#">Torneios</a></li>
+					<li><a href="{% url 'tournament:chessfestival' %}">Festival de Xadrez</a></li>
+					<li class="active">Inscrição</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- page-intro end -->
+
+<!-- main-container start -->
+<!-- ================ -->
+<section class="main-container">
+
+	<div class="container">
+		<div class="row">
+
+			<!-- main start -->
+            <!-- ================ -->
+            <div class="main col-md-12">
+
+                <!-- page-title start -->
+                <!-- ================ -->
+                <h1 class="page-title">Festival de Xadrez da Família</h1>
+                <hr />
+
+                <h2>Inscrição</h2>
+
+                <form action="" method="post" class="form-horizontal labels-left" enctype="multipart/form-data" id="tournamentsubscription-form">
+                    {% csrf_token %}
+
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-danger">
+                            {{ form.non_field_errors.as_text }}
+                        </div>
+                    {% endif %}
+
+                    {% for field in form %}
+                        <div class="form-group {% if field.errors %}has-error{% endif %}">
+                            {% if field.errors %}
+                            <div class="col-sm-10 col-sm-offset-2">
+                                <div class="text-danger" role="alert">
+                                    {{ field.errors.as_text }}
+                                </div>
+                            </div>
+                            {% endif %}
+                            <label class="col-sm-2 control-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                            <div class="col-sm-6">
+                                {{ field }}
+                                <span class="help-block m-b-none">{{ field.help_text }}</span>
+                            </div>
+                        </div>
+                    {% endfor %}
+
+                    <div class="row">
+                        {% for formset in inlines %}
+                            <div id="accordion" class="panel-group">
+                                <div class="panel">
+                                    <div class="panel-heading panel-default">
+                                        <h4 class="panel-title">
+                                            <a data-toggle="collapse" data-parent="#accordion" href="#competitors">
+                                                <i class="fa fa-star"></i>
+                                                Atleta(s)
+                                            </a>
+                                        </h4>
+                                    </div>
+                                    <div id="competitors" class="panel-collapse collapse in">
+                                        <div class="panel-body">
+                                            <table class="table table-bordered table-striped">
+                                            {% for form in formset %}
+                                                {% if forloop.first %}
+                                                    <thead>
+                                                        {% for field in form.visible_fields %}
+                                                            <th>{{ field.label }}</th>
+                                                        {% endfor %}
+                                                    </thead>
+                                                    <tbody>
+                                                {% endif %}
+
+                                                <tr class="{% cycle odd,even %}">
+                                                    {% for field in form.visible_fields %}
+                                                        <td>
+                                                            {% if forloop.first %}
+                                                                {% for hidden in form.hidden_fields %}
+                                                                    {{ hidden }}
+                                                                {% endfor %}
+                                                            {% endif %}
+
+                                                            {{ field.errors.as_ul }}
+                                                            {{ field }}
+                                                        </td>
+                                                    {% endfor %}
+                                                </tr>
+                                                {% if forloop.last %}
+                                                    </tbody>
+                                                {% endif %}
+                                            {% endfor %}
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                           {{ formset.management_form }}
+                           <div class="formset-prefix" style="display:none" prefix="{{ formset.prefix }}"></div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="submit" class="btn btn-default" value="Efetuar inscrição" />
+                            <a href="{% url 'tournament:chessfestival' %}" class="btn btn-white">Cancelar</a>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+		</div>
+	</div>
+</section>
+<!-- main-container end -->
+
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'site/js/jquery.formset.js' %}"></script>
+    <script type="text/javascript" src="{{ STATIC_URL }}site/plugins/jquery.mask.min.js"></script>
+    <script type='text/javascript' src='{% static 'js/jquery-ui.js' %}'></script>
+    <script type="text/javascript">
+        $('.birth').focus(function() {
+            $(this).mask("99/99/9999");
+        });
+        $(document).ready(function() {
+            var prefix = $(".formset-prefix").attr('prefix');
+            $("#tournamentsubscription-form").find("tbody tr").formset({
+                prefix: prefix,
+                addText: "Adicionar outro",
+                deleteText: "Remover",
+            });
+        });
+    </script>
+{% endblock %}

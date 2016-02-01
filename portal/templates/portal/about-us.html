@@ -1,0 +1,61 @@
+{% extends 'site/base.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+<!-- page-intro start-->
+<!-- ================ -->
+<div class="page-intro">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<ol class="breadcrumb">
+					<li><i class="fa fa-home pr-10"></i><a href="{% url 'home' %}">Página Inicial</a></li>
+					<li class="active">{{ object.title }}</li>
+				</ol>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- page-intro end -->
+
+<!-- main-container start -->
+<!-- ================ -->
+<section class="main-container">
+
+	<div class="container">
+		<div class="row">
+
+			<!-- main start -->
+			<!-- ================ -->
+			<div class="main col-md-12">
+
+				<!-- page-title start -->
+				<!-- ================ -->
+				<h1 class="page-title">{{ object.title }}</h1>
+				<div class="separator-2"></div>
+				<p class="lead">{{ object.description }}</p>
+				<!-- page-title end -->
+
+				<div class="row">
+					<div class="col-md-6"
+						<p>{{ object.text|safe }}</p>
+						<div class="space hidden-md hidden-lg"></div>
+					</div>
+					<div class="col-md-6">
+						<div class="owl-carousel content-slider-with-controls">
+							{% include 'portal/gallery.html' %}
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!-- main end -->
+
+		</div>
+	</div>
+</section>
+<!-- main-container end -->
+
+{% endblock %}

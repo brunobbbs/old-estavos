@@ -1,0 +1,332 @@
+{% extends 'system/base.html' %}
+
+{% load staticfiles %}
+{% load esap_labels %}
+
+{% block stylesheets %}
+    <link href="{{ STATIC_URL }}system/css/plugins/summernote/summernote.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}system/css/plugins/summernote/summernote-bs3.css" rel="stylesheet">
+    <link href="{{ STATIC_URL }}system/css/plugins/chosen/chosen.css" rel="stylesheet">
+
+    <!-- Toastr style -->
+    <link href="{{ STATIC_URL }}system/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+{% endblock stylesheets %}
+
+{% block content %}
+
+<div class="row wrapper border-bottom white-bg page-heading">
+    <div class="col-lg-10">
+        <h2>ESAP - ESTAVOS Sistema de Aulas Particulares</h2>
+        <ol class="breadcrumb">
+            <li>
+                <a href="{% url 'dashboard:home' %}">Início</a>
+            </li>
+            <li>
+                ESAP
+            </li>
+            <li>
+                <a href="{% url 'dashboard:modules' %}">Módulos</a>
+            </li>
+            <li class="active">
+                <strong>{{ object.title }}</strong>
+            </li>
+        </ol>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12">
+        <div class="wrapper wrapper-content animated fadeInUp">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="m-b-md">
+                                <a href="{% url 'dashboard:module_update' object.pk %}" id="edit_classes" class="btn btn-white btn-xs pull-right">Editar módulo</a>
+                                <h2>{{ object.title }}</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <dl class="dl-horizontal">
+                                <dt>Status:</dt> <dd><span class="{{ object.status|label_status_color }}">{{ object.active|label_status }}</span></dd>
+                                <dt>Nível:</dt> <dd>{{ object.get_level_display }}</dd>
+                                <dt>Frequência sugerida:</dt> <dd>{{ object.frequency }}/{{ object.get_frequency2_display }}</dd>
+                                <dt>Quantidade de aulas:</dt>
+                                <dd>{{ object.classes.all.count }} aulas</dd>
+                            </dl>
+                        </div>
+                        <div class="col-lg-6" id="cluster_info">
+                            <dl class="dl-horizontal" >
+                                <dt>Valor:</dt>
+                                <dd>R$ {% if object.value %}{{ object.value|floatformat:2 }}{% else %}0.00{% endif %}</dd>
+                                <dt>Desconto à vista:</dt> <dd>{{ object.disccount }}%</dd>
+                                <dt>Parcelamento:</dt>
+                                {% for plan in object.plans.all %}
+                                    <dd><span>{{ plan.quantity }}x {{ plan.type_plan }}</span></dd>
+                                {% empty %}
+                                    <dd>Não informado</dd>
+                                {% endfor %}
+                                <dt>Horas/aula:</dt>
+                                <dd>{{ object.module_duration }}</dd>
+                            </dl>
+                        </div>
+                    </div>
+                    <div class="row m-t-sm">
+                        <div class="col-lg-12">
+                            <div class="panel blank-panel">
+                                <div class="panel-heading">
+                                    <div class="panel-options">
+                                        <ul class="nav nav-tabs">
+                                            <li class="active"><a href="#tab-0" data-toggle="tab">Aulas</a></li>
+                                            <li class=""><a href="#tab-1" data-toggle="tab">Perfil</a></li>
+                                            <li class=""><a href="#tab-2" data-toggle="tab">Considerações</a></li>
+                                            <li class=""><a href="#tab-3" data-toggle="tab">Curiosidade</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="panel-body">
+                                    <div class="tab-content">
+                                        <div class="tab-pane active" id="tab-0">
+                                            <div class="ibox float-e-margins">
+                                                <div class="ibox-title">
+                                                    <h5>Aulas deste módulo</h5>
+                                                    <div class="ibox-tools">
+                                                        <a class="collapse-link">
+                                                            <i class="fa fa-chevron-up"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="ibox-content" id="module-classes">
+                                                     <div class="project-list">
+                                                        <table class="table table-hover" id="classes-list">
+                                                            <tbody>
+                                                            {% for object in object.classes.all %}
+                                                                <tr>
+                                                                    <td class="classes-level">
+                                                                        <span class="label label-{{ object.category|label_category }}">{{ object.get_category_display|default_if_none:"Náo informado" }}</span>
+                                                                    </td>
+                                                                    <td class="classes-title">
+                                                                        <a href="{% url 'dashboard:classes_detail' object.pk %}">{{ object.title }}</a>
+                                                                        <br/>
+                                                                        <small><strong>Nível</strong>: {{ object.get_level_display }} {% if object.new %}<span class="badge badge-warning-light">Novo</span>{% endif %}</small>
+                                                                    </td>
+                                                                    <td class="classes-keywords">
+                                                                        <ul style="padding: 0" class="tag-list">
+                                                                            {% for keyword in object.keywords.all %}
+                                                                                <li><a href="{% url 'dashboard:keyword_detail' keyword.slug %}"><i class="fa fa-tag"></i> {{ keyword.name }}</a></li>
+                                                                            {% endfor %}
+                                                                        </ul>
+                                                                    </td>
+                                                                    <td class="classes-duration">
+                                                                        <span class="label label-primary">{{ object.time }}</span> minutos
+                                                                    </td>
+                                                                    <td class="classes-actions">
+                                                                        <a href="" value="{{ object.pk }}" class="btn btn-white btn-sm remove-class"><i class="fa fa-times"></i> Remover</a>
+                                                                    </td>
+                                                                </tr>
+                                                            {% empty %}
+                                                            <tr><p><strong>Nenhuma aula cadastrada.</strong></p></tr>
+                                                            {% endfor %}
+                                                            </tbody>
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="tab-1">
+
+                                            <div class="ibox float-e-margins">
+                                                <div class="ibox-title">
+                                                    <div class="ibox-tools">
+                                                        <button id="edit_profile"
+                                                                class="btn btn-primary btn-xs m-l-sm"
+                                                                onclick="edit('profile', 'module_profile')"
+                                                                type="button">Atualizar</button>
+                                                        <button id="save_profile"
+                                                                style="display:none;"
+                                                                class="btn btn-success btn-xs m-l-sm"
+                                                                onclick="save('profile', 'module_profile')"
+                                                                type="button">Salvar</button>
+                                                    </div>
+                                                </div>
+                                                <div class="ibox-content" id="module_profile">
+                                                     {{ object.profile|safe }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="tab-2">
+                                            <div class="ibox float-e-margins">
+                                                <div class="ibox-title">
+                                                    <div class="ibox-tools">
+                                                        <button id="edit_considerations"
+                                                                class="btn btn-primary btn-xs m-l-sm"
+                                                                onclick="edit('considerations', 'module_considerations')"
+                                                                type="button">Atualizar</button>
+                                                        <button id="save_considerations"
+                                                                style="display:none;"
+                                                                class="btn btn-success btn-xs m-l-sm"
+                                                                onclick="save('considerations', 'module_considerations')"
+                                                                type="button">Salvar</button>
+                                                    </div>
+                                                </div>
+                                                <div class="ibox-content" id="module_considerations">
+                                                     {{ object.considerations|safe }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="tab-pane" id="tab-3">
+                                            <div class="ibox float-e-margins">
+                                                <div class="ibox-title">
+                                                    <div class="ibox-tools">
+                                                        <button id="edit_curiosity"
+                                                                class="btn btn-primary btn-xs m-l-sm"
+                                                                onclick="edit('curiosity', 'module_curiosity')"
+                                                                type="button">Atualizar</button>
+                                                        <button id="save_curiosity"
+                                                                style="display:none;"
+                                                                class="btn btn-success btn-xs m-l-sm"
+                                                                onclick="save('curiosity', 'module_curiosity')"
+                                                                type="button">Salvar</button>
+                                                    </div>
+                                                </div>
+                                                <div class="ibox-content" id="module_curiosity">
+                                                     {{ object.curiosity|safe }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div style="display:none;">
+    <form id="update_fields"
+          action="{% url 'dashboard:module_ajax_update' object.pk %}">
+        {% csrf_token %}
+        <input type="hidden" name="frequency2" value="{{ object.frequency2 }}" />
+        <input type="hidden" name="level" value="{{ object.level }}" />
+        <input type="hidden" name="frequency" value="{{ object.frequency }}" />
+        <input type="hidden" name="title" value="{{ object.title }}" />
+        <input type="hidden" id="field_profile" name="profile" value="{{ object.profile }}" />
+        <input type="hidden" id="field_considerations" name="considerations" value="{{ object.considerations }}" />
+        <input type="hidden" id="field_curiosity" name="curiosity" value="{{ object.curiosity }}" />
+        <select type="hidden" id="field_classes" name="classes" multiple="multiple">
+        {% for obj in object.classes.all %}
+            <option value="{{ obj.pk }}" selected="selected">{{ obj.title }}</option>
+        {% endfor %}
+        </select>
+    </form>
+</div>
+
+{% endblock content %}
+
+{% block js %}
+    <script src="{{ STATIC_URL }}system/js/plugins/summernote/summernote.min.js"></script>
+    <script src="{{ STATIC_URL }}system/js/plugins/chosen/chosen.jquery.js"></script>
+
+    <!-- Toastr script -->
+    <script src="{{ STATIC_URL }}system/js/plugins/toastr/toastr.min.js"></script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+            $(".remove-class").click(function(e) {
+                e.preventDefault();
+                var class_id = $(this).attr('value'),
+                    line = $(this).parents("tr");
+                removeClasses(class_id, line);
+            });
+        });
+
+        function removeClasses(class_id, line) {
+            var obj = $("#field_classes option:selected[value='" + class_id + "']");  // obj on hidden form to update
+            obj.remove();
+            $.ajax({
+                type: "POST",
+                url: $("#update_fields").attr("action"),
+                data: $("#update_fields").serialize(),
+                dataType: "json",
+                beforeSend: function () {
+                    $("body").spin();
+                },
+                success: function(content) {
+                    line.addClass('animated bounceOutRight');
+                    line.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+                        line.fadeOut(100, function() { line.remove(); });
+                    });
+                },
+                error: function(request, status, error) {
+                    toastr.options = {
+                      "closeButton": true,
+                      "debug": false,
+                      "progressBar": true,
+                      "positionClass": "toast-top-right",
+                      "onclick": null,
+                      "showDuration": "400",
+                      "hideDuration": "1000",
+                      "timeOut": "7000",
+                      "extendedTimeOut": "1000",
+                      "showEasing": "swing",
+                      "hideEasing": "linear",
+                      "showMethod": "fadeIn",
+                      "hideMethod": "fadeOut"
+                    };
+                    toastr.warning("Um módulo deve possuir pelo menos uma aula associada a ele.", "Não foi posssível excluir a aula");
+                    line.addClass('animated shake');
+                    line.one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+                        line.attr('class', '');
+                    });
+                },
+                complete: function(data) {
+                    $("body").spin(false);
+                }
+            });
+            return
+        }
+
+        function updateModule(field, content) {
+            $("#update_fields #field_" + field).attr("value", content);
+            $.ajax({
+                type: "POST",
+                url: $("#update_fields").attr("action"),
+                data: $("#update_fields").serialize(),
+                dataType: "json",
+                beforeSend: function () {
+                    $("body").spin();
+                },
+                success: function(content) {
+                    console.log(content);
+                },
+                error: function(errormsg) {
+                    alert(errormsg);
+                },
+                complete: function(data) {
+                    $("body").spin(false);
+                }
+            });
+            return
+        }
+        var edit = function(field, element_id) {
+            $('#' + element_id).summernote({focus: true});
+            $("#edit_" + field).hide();
+            $("#save_" + field).show();
+        };
+        var save = function(field, element_id) {
+            var element = '#' + element_id;
+            var aHTML = $(element).code();
+            $(element).destroy();
+            updateModule(field, aHTML);
+            $("#edit_" + field).show();
+            $("#save_" + field).hide();
+        };
+
+    </script>
+{% endblock js %}

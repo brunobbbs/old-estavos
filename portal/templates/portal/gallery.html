@@ -1,0 +1,6 @@
+{% for image in gallery %}
+    <div class="overlay-container">
+        <img src="{{ image.file.url }}" alt="{{ image.title }}">
+        <a href="{{ image.file.url }}" class="popup-img overlay" title="{{ image.title }}"><i class="fa fa-search-plus"></i></a>
+    </div>
+{% endfor %}
